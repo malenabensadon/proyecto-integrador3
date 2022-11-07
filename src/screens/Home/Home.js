@@ -14,22 +14,28 @@ class Home extends Component{
     }
 
     componentDidMount(){
-        db.collection('posts').onSnapshot(
-            docs => {
-                //console.log(docs);
-                let posts = [];
-                docs.forEach( doc => {
-                    posts.push({
-                        id: doc.id,
-                        data: doc.data()
-                    })
-                    this.setState({
-                        posts: posts
-                    })
-                })
+        console.log(auth.currentUser);
+        // db.collection('posts').onSnapshot(
+        //     docs => {
+        //         //console.log(docs);
+        //         let posts = [];
+        //         docs.forEach( doc => {
+        //             posts.push({
+        //                 id: doc.id,
+        //                 data: doc.data()
+        //             })
+        //             this.setState({
+        //                 posts: posts
+        //             })
+        //         })
                 
-            }
-        )
+        //     }
+        // )
+    }
+
+    logout(){
+        auth.signOut()
+        .then(()=> this.props.navigation.navigate("Login"))
     }
 
     render(){
@@ -39,16 +45,17 @@ class Home extends Component{
                 <Text> Lista de posteos </Text> 
                 
                 <TouchableOpacity onPress={ () => this.props.navigation.navigate('NewPost')}>
-                <Text>New Post</Text>
-
-                    </TouchableOpacity>
+                    <Text>New Post</Text>
+                </TouchableOpacity>
 
                 <FlatList 
                         data={this.state.posts}
                         keyExtractor={ onePost => onePost.id.toString()}
                         renderItem={ ({item}) => <Post postData={item} />}
                     />   
-                   
+                 <TouchableOpacity onPress={ () => this.logout()} >
+                    <Text>Log out</Text>
+                 </TouchableOpacity>
             </>
 
         )

@@ -49,11 +49,11 @@ class Register extends Component {
 
                     this.props.navigation.navigate('HomeMenu')
                 })
-                //equivalente a res.redirect
-                .catch(error => console.log(error))    
+               
+              
                 
             })
-            .catch(error => console.log(error))
+            .catch(error => this.setState ({errors: error.message}))
     }
 
 
@@ -69,6 +69,7 @@ class Register extends Component {
                         onChangeText={ text => this.setState({email:text}) }
                         value={this.state.email}
                     /> 
+                    <Text> {this.state.errors} </Text>
                     <TextInput  
                         placeholder='password'
                         keyboardType='default'

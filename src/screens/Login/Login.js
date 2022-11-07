@@ -21,6 +21,7 @@ class Login extends Component {
         auth.signInWithEmailAndPassword(email, pass)
             .then( res => {
                 //equivalente a res.redirect
+              
                 this.props.navigation.navigate('HomeMenu')
             })
             .catch(error => console.log(error))
@@ -46,7 +47,7 @@ class Login extends Component {
                     />  
 
                     <TouchableOpacity onPress={()=>this.loginUser(this.state.email, this.state.pass)}>
-                        <Text onPress={ () => this.props.navigation.navigate('Home')}>Ingresar</Text>
+                        <Text>Ingresar</Text>
                     </TouchableOpacity>
                     <Text onPress={ () => this.props.navigation.navigate('Register')} >Ir a Registro</Text>
                 </View>
