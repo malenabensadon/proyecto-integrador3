@@ -16,22 +16,28 @@ class NewPost extends Component{
     }
 
     createPost(texto, photo){
-        db.collection('posts').add({
-                owner: auth.currentUser.email, 
-                textoPost: texto,
-                photo: photo,
-                likes:[],
-                comments:[],
-                createdAt: Date.now()
+        db.collection('users').where('owner', '==', auth.currentUser.email)
+            .onSnapshot(users => {
+                if (users.docs.length > 0) {
+                    db.collection('posts').add({
+                        owner: auth.currentUser.email,
+                        userName: users.docs[0].data().userName,
+                        textoPost: texto,
+                        photo: photo,
+                        likes:[],
+                        comments:[],
+                        createdAt: Date.now()
+                    })
+                    .then(() => {
+                        this.setState({
+                            textoPost:'',
+                           // showCamera: true,
+                        })
+                        this.props.navigation.navigate('Home')
+                    })
+                    .catch( e => console.log(e))
+                }
             })
-            .then(() => {
-                this.setState({
-                    textoPost:'',
-                   // showCamera: true,
-                })
-                this.props.navigation.navigate('Home')
-            })
-            .catch( e => console.log(e))
     }
 
     onImageUpload(url){

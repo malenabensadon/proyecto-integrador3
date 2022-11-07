@@ -14,23 +14,20 @@ class Home extends Component{
     }
 
     componentDidMount(){
-        console.log(auth.currentUser);
-        // db.collection('posts').onSnapshot(
-        //     docs => {
-        //         //console.log(docs);
-        //         let posts = [];
-        //         docs.forEach( doc => {
-        //             posts.push({
-        //                 id: doc.id,
-        //                 data: doc.data()
-        //             })
-        //             this.setState({
-        //                 posts: posts
-        //             })
-        //         })
-                
-        //     }
-        // )
+        db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(
+            docs => {
+                let posts = [];
+                docs.forEach(doc => {
+                    posts.push({
+                        id: doc.id,
+                        data: doc.data()
+                    })
+                    this.setState({
+                        posts: posts
+                    })
+                })
+            }
+        )
     }
 
     logout(){
@@ -49,10 +46,10 @@ class Home extends Component{
                 </TouchableOpacity>
 
                 <FlatList 
-                        data={this.state.posts}
-                        keyExtractor={ onePost => onePost.id.toString()}
-                        renderItem={ ({item}) => <Post postData={item} />}
-                    />   
+                    data={this.state.posts}
+                    keyExtractor={ onePost => onePost.id.toString()}
+                    renderItem={ ({item}) => <Post postData={item} />}
+                />
                  <TouchableOpacity onPress={ () => this.logout()} >
                     <Text>Log out</Text>
                  </TouchableOpacity>

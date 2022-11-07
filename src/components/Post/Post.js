@@ -39,11 +39,20 @@ class Post extends Component {
     }
 
     unlike(){
-        //tarea para la casa.
+        db.collection('posts')
+            .doc(this.props.postData.id) //identificar el documento
+            .update({
+                likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email) //traer el email del usuario logueado con auth.currentUser.email. Chequear que este importado auth.
+            })
+            .then(()=> this.setState({
+                cantidadDeLikes: this.state.cantidadDeLikes - 1,
+                miLike: false, 
+                })
+            )
+            .catch(e=>console.log(e))
     }
 
     render(){
-        console.log(this.props);
         return(
             <View>
                 <Image 
@@ -51,6 +60,7 @@ class Post extends Component {
                     source={{uri: this.props.postData.data.photo}}
                     resizeMode='cover'
                 />
+                <Text> {this.props.postData.data.userName} </Text>
                 <Text> {this.props.postData.data.textoPost} </Text>
                 <Text> Cantidad de Likes: {this.state.cantidadDeLikes} </Text>
                 { this.state.miLike ? 
