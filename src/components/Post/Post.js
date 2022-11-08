@@ -52,6 +52,8 @@ class Post extends Component {
             )
             .catch(e=>console.log(e))
     }
+
+   
     
 
     render(){
@@ -81,7 +83,10 @@ class Post extends Component {
 }
 const styles = StyleSheet.create({
     photo:{
-        height:250
+        height:550,
+        width: 600,
+        marginLeft: 430
+
     }
 }) 
 
