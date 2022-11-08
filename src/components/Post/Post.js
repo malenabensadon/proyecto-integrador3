@@ -4,6 +4,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import {auth, db} from '../../firebase/config';
 import firebase from 'firebase';
 
+
 class Post extends Component {
     constructor(props){
         super(props)
@@ -51,6 +52,7 @@ class Post extends Component {
             )
             .catch(e=>console.log(e))
     }
+    
 
     render(){
         return(
@@ -60,6 +62,7 @@ class Post extends Component {
                     source={{uri: this.props.postData.data.photo}}
                     resizeMode='cover'
                 />
+                
                 <Text> {this.props.postData.data.userName} </Text>
                 <Text> {this.props.postData.data.textoPost} </Text>
                 <Text> Cantidad de Likes: {this.state.cantidadDeLikes} </Text>
