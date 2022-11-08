@@ -51,30 +51,27 @@ class Post extends Component {
                 })
             )
             .catch(e=>console.log(e))
-    }
-
-   
-    
+    } 
 
     render(){
         return(
-            <View>
+            <View style={styles.fondo}>
                 <Image 
                     style={styles.photo}
                     source={{uri: this.props.postData.data.photo}}
                     resizeMode='cover'
                 />
                 
-                <Text> {this.props.postData.data.userName} </Text>
-                <Text> {this.props.postData.data.textoPost} </Text>
-                <Text> Cantidad de Likes: {this.state.cantidadDeLikes} </Text>
+                <Text style={styles.titulitos}> {this.props.postData.data.userName} </Text>
+                <Text style={styles.titulitos}> {this.props.postData.data.textoPost} </Text>
+                <Text style={styles.titulitos}> Cantidad de Likes: {this.state.cantidadDeLikes} </Text>
                 { this.state.miLike ? 
                     <TouchableOpacity onPress={ ()=> this.unlike() }>
-                        <Text>No me gusta más</Text>
+                        <Text style={styles.titulitos}>No me gusta más</Text>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity onPress={ ()=> this.like() }>
-                        <Text>Me gusta</Text>
+                        <Text style={styles.titulitos}>Me gusta</Text>
                     </TouchableOpacity>
                 }
             </View>
@@ -87,7 +84,15 @@ const styles = StyleSheet.create({
         width: 600,
         marginLeft: 430
 
+    }, 
+    fondo:{
+        backgroundColor: 'rgb(0,0,0)'
+    },
+    titulitos: {
+        color: 'white'
     }
+
+
 }) 
 
 export default Post;
