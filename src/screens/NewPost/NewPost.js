@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Text, TextInput, TouchableOpacity,View} from 'react-native';
 import {auth, db} from '../../firebase/config';
-//import MyCamera from '../components/MyCamera';
+import MyCamera from '../../components/MyCamera/MyCamera';
 
 
 class NewPost extends Component{
@@ -11,7 +11,7 @@ class NewPost extends Component{
             textoPost:'',
             createdAt:'',
             photo:'',
-           // showCamera: true,
+            showCamera: true,
         }
     }
 
@@ -31,7 +31,7 @@ class NewPost extends Component{
                     .then(() => {
                         this.setState({
                             textoPost:'',
-                           // showCamera: true,
+                            showCamera: true,
                         })
                         this.props.navigation.navigate('Home')
                     })
@@ -43,7 +43,7 @@ class NewPost extends Component{
     onImageUpload(url){
         this.setState({
             photo: url,
-          //  showCamera: false,
+            showCamera: false,
         })
     }
 
@@ -52,9 +52,9 @@ class NewPost extends Component{
         return(
             <View>
             {
-                //this.state.showCamera ?
-                // <MyCamera onImageUpload={url => this.onImageUpload(url)}/>
-                // :
+                this.state.showCamera ?
+                 <MyCamera onImageUpload={url => this.onImageUpload(url)}/>
+                 :
                 <View>
                     <Text> New Post</Text>
                     <View>
