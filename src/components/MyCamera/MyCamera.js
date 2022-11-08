@@ -73,7 +73,7 @@ cancelar(){
                             ref={metodosDeCamara => this.metodosDeCamara = metodosDeCamara }
                         />
                         <TouchableOpacity style={styles.button} onPress={()=>this.sacarFoto()}>
-                            <Text>Sacar foto</Text>
+                            <Text style={styles.texto}>Sacar foto</Text>
                         </TouchableOpacity>
                     </View>
                     :
@@ -84,10 +84,10 @@ cancelar(){
                             resizeMode='cover'
                         />
                         <TouchableOpacity style={styles.button} onPress={()=>this.cancelar()}>
-                            <Text>Cancelar</Text>
+                            <Text style={styles.texto}>Cancelar</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button} onPress={()=>this.guardarFoto()}>
-                            <Text>Aceptar</Text>
+                            <Text style={styles.texto}>Aceptar</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -114,6 +114,13 @@ const styles = StyleSheet.create({
     },
     preview:{
         height:'40vh'
+    },
+    texto:{
+        fontWeight: 600,
+        color: 'white',
+        fontSize: 24,
+        textAlign: 'center'
+
     }
 }) 
 

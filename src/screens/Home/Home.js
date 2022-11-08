@@ -44,26 +44,46 @@ class Home extends Component{
                    
             <>
              <Navbar/>
-                <Text> Home</Text>
-                <Text> Lista de posteos </Text> 
+                <Text style={styles.titulos}>Home</Text>
+                <Text style={styles.titulos}>Lista de posteos </Text> 
                 
                 <TouchableOpacity onPress={ () => this.props.navigation.navigate('NewPost')}>
-                    <Text>New Post</Text>
+                    <Text style={styles.titulos}>New Post</Text>
                 </TouchableOpacity>
 
-                <FlatList 
+                <FlatList  style={styles.fondo}
                     data={this.state.posts}
                     keyExtractor={ onePost => onePost.id.toString()}
                     renderItem={ ({item}) => <Post postData={item} />}
                 />
-                 <TouchableOpacity onPress={ () => this.logout()} >
-                    <Text>Log out</Text>
+                 <TouchableOpacity  onPress={ () => this.logout()} >
+                    <Text style={styles.logout}>Log out</Text>
                  </TouchableOpacity>
             </>
            
 
         )
     }
+    
 }
+const styles = StyleSheet.create({
+    fondo:{
+        backgroundColor: 'black'
+        
+    }, 
+    logout:{
+        color: 'white',
+        backgroundColor: 'black'
+
+    },
+    titulos:{
+        color: 'white',
+        backgroundColor: 'black'
+
+
+    }
+
+
+}) 
 
 export default Home;

@@ -62,9 +62,9 @@ class Post extends Component {
                     resizeMode='cover'
                 />
                 
-                <Text style={styles.titulitos}> {this.props.postData.data.userName} </Text>
-                <Text style={styles.titulitos}> {this.props.postData.data.textoPost} </Text>
-                <Text style={styles.titulitos}> Likes: {this.state.cantidadDeLikes} </Text>
+                <Text style={styles.titulitos}>{this.props.postData.data.userName}</Text>
+                <Text style={styles.titulitos}>{this.props.postData.data.textoPost}</Text>
+                <Text style={styles.titulitos}>Likes: {this.state.cantidadDeLikes}</Text>
                 { this.state.miLike ? 
                     <TouchableOpacity onPress={ ()=> this.unlike() }>
                         <Text style={styles.titulitos}>DISLIKE</Text>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         height:150,
         width: 200,
         alignContent: 'center',
-        marginLeft: 95,
+        marginLeft: 80,
         marginTop: 20,
         marginBottom: 15
         
@@ -92,11 +92,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgb(0,0,0)',
         borderColor: 'rgb(180, 37, 130)',
         borderWidth: 2,
+        borderRadius: 10,
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        margin: 15
     },
     titulitos: {
-        color: 'white'
+        color: 'white',
+        alignContent: 'center',
+        marginLeft: 80,
     }
 
 
