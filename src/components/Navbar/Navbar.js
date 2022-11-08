@@ -25,9 +25,6 @@ function Navbar(){
 const styles = StyleSheet.create({
     logo:{
         height:200, 
-    },
-    perfil:{
-        height:100
     }, 
     nav: {
         backgroundColor:'rgb(0,0,0)'

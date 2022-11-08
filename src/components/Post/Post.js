@@ -64,14 +64,14 @@ class Post extends Component {
                 
                 <Text style={styles.titulitos}> {this.props.postData.data.userName} </Text>
                 <Text style={styles.titulitos}> {this.props.postData.data.textoPost} </Text>
-                <Text style={styles.titulitos}> Cantidad de Likes: {this.state.cantidadDeLikes} </Text>
+                <Text style={styles.titulitos}> Likes: {this.state.cantidadDeLikes} </Text>
                 { this.state.miLike ? 
                     <TouchableOpacity onPress={ ()=> this.unlike() }>
-                        <Text style={styles.titulitos}>No me gusta más</Text>
+                        <Text style={styles.titulitos}>DISLIKE</Text>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity onPress={ ()=> this.like() }>
-                        <Text style={styles.titulitos}>Me gusta</Text>
+                        <Text style={styles.titulitos}>LIKE</Text>
                     </TouchableOpacity>
                 }
             </View>
@@ -80,13 +80,20 @@ class Post extends Component {
 }
 const styles = StyleSheet.create({
     photo:{
-        height:550,
-        width: 600,
-        marginLeft: 430
-
+        height:150,
+        width: 200,
+        alignContent: 'center',
+        marginLeft: 95,
+        marginTop: 20,
+        marginBottom: 15
+        
     }, 
     fondo:{
-        backgroundColor: 'rgb(0,0,0)'
+        backgroundColor: 'rgb(0,0,0)',
+        borderColor: 'rgb(180, 37, 130)',
+        borderWidth: 2,
+        flex: 1,
+        justifyContent: 'center'
     },
     titulitos: {
         color: 'white'

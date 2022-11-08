@@ -5,6 +5,7 @@ import { View,
          TextInput,
          TouchableOpacity,
         StyleSheet } from 'react-native';
+import { WhiteBalance } from 'expo-camera';
 
 class Login extends Component {
     constructor(){
@@ -54,10 +55,10 @@ class Login extends Component {
 
     render(){
         return(
-            <View> 
-                <Text>Login</Text>
+            <View style={style.container}> 
+                <Text style={style.title}>Login</Text>
                 <View>
-                   <TextInput  
+                   <TextInput  style={style.input}
                        placeholder='email'
                        keyboardType='email-address'
                        onChangeText={ text => this.setState({email:text}) }
@@ -66,7 +67,7 @@ class Login extends Component {
                     {this.state.errors.field === 'email' && (
                         <Text> {this.state.errors.message} </Text>
                     )}
-                    <TextInput  
+                    <TextInput  style={style.input}
                         placeholder='password'
                         keyboardType='default'
                         onChangeText={ text => this.setState({pass:text}) }
@@ -75,29 +76,72 @@ class Login extends Component {
                     {this.state.errors.field === 'password' && (
                         <Text> {this.state.errors.message} </Text>
                     )}
-                    <TouchableOpacity
-                        onPress={()=> this.loginUser(
+                    <TouchableOpacity  onPress={()=> this.loginUser(
                             this.state.email,
                             this.state.pass
                             )
+                            
                         }
                         style={{
+                            
                             opacity: (this.state.email === '' || this.state.pass === '')
-                                ? 0.5 : 1
+                                ? 0.5 : 1,
                         }}
                         disabled={
                             this.state.email === '' || this.state.pass === ''
                         }
                     >
-                        <Text>Ingresar</Text>
+                        <Text style={style.text}>Ingresar</Text>
                     </TouchableOpacity>
-                    <Text onPress={ () => this.props.navigation.navigate('Register')} >Ir a Registro</Text>
+                    <Text onPress={ () => this.props.navigation.navigate('Register')} style={style.btnLoginTxt}>Ir a Registro</Text>
                 </View>
             </View>
         )
-    }
+
+
+        
+    };
+    
+    
     
 }
+const style = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white',
+        color: 'rgb(255,255,255)',
+        padding: 15,
+        justifyContent: 'center',
+    },
+    title: {
+        fontWeight: 600,
+        color: 'black',
+        fontSize: 24,
+        textAlign: 'center'
+    },
+    btnLogin: {
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'rgb(180, 37, 130)',
+        backgroundColor: 'rgb(0,0,0)',
+        margin: 10,
+        padding: 10,
+        textAlign: 'right'
+    },
+    btnLoginTxt: {
+        color: 'black'
+    },
+    input: {
+        color: 'rgb(0,0,0)',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'rgb(0,0,0)',
+        backgroundColor: 'rgb(255,255,255)',
+        padding: 10,
+        margin: 10
+    }
+});
+
 
 
 export default Login;
