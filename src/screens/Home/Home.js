@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {auth, db} from '../../firebase/config';
 import {Text, View, FlatList, TouchableOpacity} from 'react-native';
+import { StyleSheet } from 'react-native-web';
 import NewPost from '../NewPost/NewPost';
 import Post from '../../components/Post/Post'
-
+import Navbar from '../../components/Navbar/Navbar';
 
 class Home extends Component{
     constructor(){
@@ -12,6 +13,7 @@ class Home extends Component{
             posts:[]
         }
     }
+
 
     componentDidMount(){
         db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(
@@ -35,9 +37,13 @@ class Home extends Component{
         .then(()=> this.props.navigation.navigate("Login"))
     }
 
+   
+
     render(){
         return(
+                   
             <>
+             <Navbar/>
                 <Text> Home</Text>
                 <Text> Lista de posteos </Text> 
                 
@@ -54,6 +60,7 @@ class Home extends Component{
                     <Text>Log out</Text>
                  </TouchableOpacity>
             </>
+           
 
         )
     }
