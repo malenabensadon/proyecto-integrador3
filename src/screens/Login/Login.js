@@ -55,11 +55,13 @@ class Login extends Component {
 
     render(){
         return(
+            
+           
             <View style={style.container}> 
                 <Text style={style.title}>Login</Text>
                 <View>
                    <TextInput  style={style.input}
-                       placeholder='email'
+                       placeholder='Email'
                        keyboardType='email-address'
                        onChangeText={ text => this.setState({email:text}) }
                        value={this.state.email}
@@ -68,7 +70,7 @@ class Login extends Component {
                         <Text> {this.state.errors.message} </Text>
                     )}
                     <TextInput  style={style.input}
-                        placeholder='password'
+                        placeholder='Password'
                         keyboardType='default'
                         onChangeText={ text => this.setState({pass:text}) }
                         value={this.state.pass}

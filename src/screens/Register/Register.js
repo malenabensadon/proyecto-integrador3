@@ -70,11 +70,11 @@ class Register extends Component {
 
     render(){
         return(
-            <View> 
-                <Text>Registro</Text>
+            <View style={style.container}> 
+                <Text style={style.title}>Register</Text>
                 <View>
-                    <TextInput  
-                        placeholder='email'
+                    <TextInput  style={style.input}
+                        placeholder='Email'
                         keyboardType='email-address'
                         onChangeText={ text => this.setState({email:text}) }
                         value={this.state.email}
@@ -82,8 +82,8 @@ class Register extends Component {
                     {this.state.errors.field === 'email' && (
                         <Text> {this.state.errors.message} </Text>
                     )}
-                    <TextInput  
-                        placeholder='password'
+                    <TextInput  style={style.input}
+                        placeholder='Password'
                         keyboardType='default'
                         onChangeText={ text => this.setState({pass:text}) }
                         value={this.state.pass}
@@ -91,13 +91,13 @@ class Register extends Component {
                     {this.state.errors.field === 'password' && (
                         <Text> {this.state.errors.message} </Text>
                     )}
-                    <TextInput  
-                        placeholder='user name'
+                    <TextInput  style={style.input}
+                        placeholder='Username'
                         keyboardType='default'
                         onChangeText={ text => this.setState({userName:text}) }
                         value={this.state.userName}
                     />
-                    <TextInput  
+                    <TextInput  style={style.input}
                         placeholder='Mini Bio'
                         keyboardType='default'
                         onChangeText={ text => this.setState({bio:text}) }
@@ -120,15 +120,51 @@ class Register extends Component {
                             this.state.email === '' || this.state.pass === ''
                         }
                     >
-                        <Text>Registrarme</Text>
+                        <Text style={style.text}>Registrarme</Text>
                     </TouchableOpacity>
-                    <Text onPress={ () => this.props.navigation.navigate('Login')} >Iniciar Sesion</Text>     
+                    <Text onPress={ () => this.props.navigation.navigate('Login')} style={style.btnLoginTxt}>Iniciar Sesion</Text>     
                 </View>
             </View>
         )
     }
     
 }
+const style = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white',
+        color: 'rgb(255,255,255)',
+        padding: 15,
+        justifyContent: 'center',
+    },
+    title: {
+        fontWeight: 600,
+        color: 'black',
+        fontSize: 24,
+        textAlign: 'center'
+    },
+    btnLogin: {
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'rgb(213, 42, 153)',
+        backgroundColor: 'rgb(0,0,0)',
+        margin: 10,
+        padding: 10,
+        textAlign: 'right'
+    },
+    btnLoginTxt: {
+        color: 'black'
+    },
+    input: {
+        color: 'rgb(0,0,0)',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'rgb(0,0,0)',
+        backgroundColor: 'rgb(255,255,255)',
+        padding: 10,
+        margin: 10
+    }
+});
 
 
 export default Register;

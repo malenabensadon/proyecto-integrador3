@@ -1,109 +1,129 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
-import {auth, db} from '../../firebase/config';
+import { auth, db } from '../../firebase/config';
 import firebase from 'firebase';
 
 
 class Post extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            cantidadDeLikes:this.props.postData.data.likes.length, //length del array de likes.
-            miLike:false
+            cantidadDeLikes: this.props.postData.data.likes.length, //length del array de likes.
+            miLike: false
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         //chequear si el email del usuario logueado está en el array. El usuario logueado se obtiene de auth.currentUser.email. Chequear que este importado auth.
         //Si está voy a cambiar el estado miLike.
-        if(this.props.postData.data.likes.includes(auth.currentUser.email)){ 
+        if (this.props.postData.data.likes.includes(auth.currentUser.email)) {
             this.setState({
-                miLike:true
+                miLike: true
             })
         }
     }
 
-    like(){
+    like() {
         //agregar el email del usuario logueado a un array en el posteo.
         db.collection('posts')
             .doc(this.props.postData.id) //identificar el documento
             .update({
                 likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email) //traer el email del usuario logueado con auth.currentUser.email. Chequear que este importado auth.
             })
-            .then(()=> this.setState({
-                cantidadDeLikes: this.state.cantidadDeLikes +1,
-                miLike: true, 
-                })
+            .then(() => this.setState({
+                cantidadDeLikes: this.state.cantidadDeLikes + 1,
+                miLike: true,
+            })
             )
-            .catch(e=>console.log(e))
+            .catch(e => console.log(e))
     }
 
-    unlike(){
+    unlike() {
         db.collection('posts')
             .doc(this.props.postData.id) //identificar el documento
             .update({
                 likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email) //traer el email del usuario logueado con auth.currentUser.email. Chequear que este importado auth.
             })
-            .then(()=> this.setState({
+            .then(() => this.setState({
                 cantidadDeLikes: this.state.cantidadDeLikes - 1,
-                miLike: false, 
-                })
+                miLike: false,
+            })
             )
-            .catch(e=>console.log(e))
-    } 
+            .catch(e => console.log(e))
+    }
 
-    render(){
-        return(
+    render() {
+        return (
             <View style={styles.fondo}>
-                <Image 
+                <Image
                     style={styles.photo}
-                    source={{uri: this.props.postData.data.photo}}
+                    source={{ uri: this.props.postData.data.photo }}
                     resizeMode='cover'
                 />
-                
-                <Text style={styles.titulitos}>{this.props.postData.data.userName}</Text>
-                <Text style={styles.titulitos}>{this.props.postData.data.textoPost}</Text>
-                <Text style={styles.titulitos}>Likes: {this.state.cantidadDeLikes}</Text>
-                { this.state.miLike ? 
-                    <TouchableOpacity onPress={ ()=> this.unlike() }>
-                        <Text style={styles.titulitos}>DISLIKE</Text>
+                <Text style={styles.first}>{this.props.postData.data.userName}:</Text>
+                <Text style={styles.second}>{this.props.postData.data.textoPost}</Text>
+                <Text style={styles.third}>Likes: {this.state.cantidadDeLikes}</Text>
+                {this.state.miLike ?
+                    <TouchableOpacity onPress={() => this.unlike()}>
+                        <Text style={styles.fourth}>DISLIKE</Text>
                     </TouchableOpacity>
                     :
-                    <TouchableOpacity onPress={ ()=> this.like() }>
-                        <Text style={styles.titulitos}>LIKE</Text>
+                    <TouchableOpacity onPress={() => this.like()}>
+                        <Text style={styles.fourth}>LIKE</Text>
                     </TouchableOpacity>
                 }
+
             </View>
         )
     }
 }
 const styles = StyleSheet.create({
-    photo:{
-        height:150,
-        width: 200,
+    photo: {
+        height: 250,
+        width: 335,
         alignContent: 'center',
-        marginLeft: 80,
-        marginTop: 20,
-        marginBottom: 15
-        
-    }, 
-    fondo:{
+        marginLeft: 10,
+        marginBottom: 15,
+        borderRadius: 8
+
+    },
+
+    fondo: {
         backgroundColor: 'rgb(0,0,0)',
-        borderColor: 'rgb(180, 37, 130)',
-        borderWidth: 2,
         borderRadius: 10,
         flex: 1,
         justifyContent: 'center',
-        margin: 15
+        margin: 15,
     },
-    titulitos: {
+    first: {
+        color: 'white',
+        alignContent: 'center',
+        marginLeft: 80,
+        flex: 1,
+        flexDirection: 'row'
+
+    },
+    second: {
+        color: 'white',
+        alignContent: 'center',
+        marginLeft: 80,
+        flex: 2,
+        flexDirection: 'row'
+
+    },
+    third: {
+        color: 'white',
+        alignContent: 'center',
+        marginLeft: 80,
+    },
+    fourth: {
         color: 'white',
         alignContent: 'center',
         marginLeft: 80,
     }
 
 
-}) 
+})
 
 export default Post;

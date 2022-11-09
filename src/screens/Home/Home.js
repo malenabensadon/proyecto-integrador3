@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import {auth, db} from '../../firebase/config';
-import {Text, View, FlatList, TouchableOpacity} from 'react-native';
+import { auth, db } from '../../firebase/config';
+import { Text, View, FlatList, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native-web';
 import NewPost from '../NewPost/NewPost';
 import Post from '../../components/Post/Post'
 import Navbar from '../../components/Navbar/Navbar';
 
-class Home extends Component{
-    constructor(){
+class Home extends Component {
+    constructor() {
         super();
         this.state = {
-            posts:[]
+            posts: []
         }
     }
 
-
-    componentDidMount(){
+    componentDidMount() {
         db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(
             docs => {
                 let posts = [];
@@ -32,58 +31,55 @@ class Home extends Component{
         )
     }
 
-    logout(){
+    logout() {
         auth.signOut()
-        .then(()=> this.props.navigation.navigate("Login"))
+            .then(() => this.props.navigation.navigate("Login"))
     }
 
-   
+    render() {
+        return (
 
-    render(){
-        return(
-                   
             <>
-             <Navbar/>
-                <Text style={styles.titulos}>Home</Text>
-                <Text style={styles.titulos}>Lista de posteos </Text> 
-                
-                <TouchableOpacity onPress={ () => this.props.navigation.navigate('NewPost')}>
-                    <Text style={styles.titulos}>New Post</Text>
-                </TouchableOpacity>
+                <Navbar />
+               {/*  <Text style={styles.titulos}>Home</Text>
+                <Text style={styles.titulos}>Lista de posteos </Text>
 
-                <FlatList  style={styles.fondo}
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('NewPost')}>
+                    <Text style={styles.titulos}>New Post</Text>
+                </TouchableOpacity> */}
+
+                <FlatList style={styles.fondo}
                     data={this.state.posts}
-                    keyExtractor={ onePost => onePost.id.toString()}
-                    renderItem={ ({item}) => <Post postData={item} />}
+                    keyExtractor={onePost => onePost.id.toString()}
+                    renderItem={({ item }) => <Post postData={item} />}
                 />
-                 <TouchableOpacity  onPress={ () => this.logout()} >
+                <TouchableOpacity onPress={() => this.logout()} >
                     <Text style={styles.logout}>Log out</Text>
-                 </TouchableOpacity>
+                </TouchableOpacity>
             </>
-           
 
         )
     }
-    
+
 }
 const styles = StyleSheet.create({
-    fondo:{
+    fondo: {
         backgroundColor: 'black'
-        
-    }, 
-    logout:{
+
+    },
+    logout: {
         color: 'white',
         backgroundColor: 'black'
 
     },
-    titulos:{
+    titulos: {
         color: 'white',
-        backgroundColor: 'black'
+        backgroundColor: 'black',
+        flex: 1
 
 
     }
 
-
-}) 
+})
 
 export default Home;
