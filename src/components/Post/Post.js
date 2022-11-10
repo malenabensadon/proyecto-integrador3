@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Image, FlatList } from 'react-native';
 
 import { auth, db } from '../../firebase/config';
 import firebase from 'firebase';
@@ -10,7 +10,9 @@ class Post extends Component {
         super(props)
         this.state = {
             cantidadDeLikes: this.props.postData.data.likes.length, //length del array de likes.
-            miLike: false
+            miLike: false,
+            cantidadDeComments: this.props.postData.data.comments.length,
+            comments: []
         }
     }
 
@@ -73,6 +75,7 @@ class Post extends Component {
                         <Text style={styles.fourth}>LIKE</Text>
                     </TouchableOpacity>
                 }
+
                 <TouchableOpacity onPress={this.props.irAComments}>
                     <Text style={styles.first}>{this.props.postData.data.comments.length} Comentarios...</Text>
                 </TouchableOpacity>
