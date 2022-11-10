@@ -16,8 +16,7 @@ function HomeMenu(){
         <Tab.Navigator screenOptions={{tabBarShowLabel: false}}>
             <Tab.Screen name="HomeStack" component={ HomeStack } options={
                     {
-                        tabBarIcon: ()=> <AntDesign name="home" size={24} color="black" />,
-                        title: 'Home'
+                        tabBarIcon: ()=> <AntDesign name="home" size={24} color="black" />
                     }
                 }/>
             <Tab.Screen name="NewPost" component={ NewPost } options={

@@ -11,7 +11,6 @@ class Home extends Component {
         this.state = {
             posts: []
         }
-        this.irAComments.bind(this)
     }
 
     componentDidMount() {
@@ -54,7 +53,7 @@ class Home extends Component {
                 <FlatList style={styles.fondo}
                     data={this.state.posts}
                     keyExtractor={onePost => onePost.id.toString()}
-                    renderItem={({ item }) => <Post postData={item} irAComments={this.irAComments} />}
+                    renderItem={({ item }) => <Post postData={item} irAComments={ () => this.irAComments()} />}
                 />
                 <TouchableOpacity onPress={() => this.logout()} >
                     <Text style={styles.logout}>Log out</Text>
