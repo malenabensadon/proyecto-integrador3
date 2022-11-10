@@ -27,7 +27,7 @@ class Comments extends Component {
             .catch(e => console.log(e))
     }
     render() {
-        console.log(this.props.comment)
+        console.log(this.props)
         return (
             <View >
                  <TextInput 
