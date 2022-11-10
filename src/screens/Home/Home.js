@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { auth, db } from '../../firebase/config';
-import { Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { Text, FlatList, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native-web';
-import NewPost from '../NewPost/NewPost';
 import Post from '../../components/Post/Post'
 import Navbar from '../../components/Navbar/Navbar';
 
 class Home extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             posts: []
         }
+        this.irAComments.bind(this)
     }
 
     componentDidMount() {
@@ -36,9 +36,12 @@ class Home extends Component {
             .then(() => this.props.navigation.navigate("Login"))
     }
 
+    irAComments() {
+        this.props.navigation.navigate("Comments")
+    }
+
     render() {
         return (
-
             <>
                 <Navbar />
                {/*  <Text style={styles.titulos}>Home</Text>
@@ -51,7 +54,7 @@ class Home extends Component {
                 <FlatList style={styles.fondo}
                     data={this.state.posts}
                     keyExtractor={onePost => onePost.id.toString()}
-                    renderItem={({ item }) => <Post postData={item} />}
+                    renderItem={({ item }) => <Post postData={item} irAComments={this.irAComments} />}
                 />
                 <TouchableOpacity onPress={() => this.logout()} >
                     <Text style={styles.logout}>Log out</Text>

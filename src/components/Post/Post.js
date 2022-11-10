@@ -73,7 +73,9 @@ class Post extends Component {
                         <Text style={styles.fourth}>LIKE</Text>
                     </TouchableOpacity>
                 }
-
+                <TouchableOpacity onPress={this.props.irAComments}>
+                    <Text style={styles.first}>{this.props.postData.data.comments.length} Comentarios...</Text>
+                </TouchableOpacity>
             </View>
         )
     }
