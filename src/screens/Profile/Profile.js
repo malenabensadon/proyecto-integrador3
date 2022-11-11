@@ -101,9 +101,9 @@ class Profile extends Component {
         return(
             <> 
                 <Text>My Profile</Text>
-                <Text>{this.state.userName}</Text>
-                <Text>{this.state.email}</Text>
-                <Text>{this.state.bio}</Text>
+                <Text>User Name: {this.state.userName}</Text>
+                <Text>Email: {this.state.email}</Text>
+                <Text>Bio: {this.state.bio}</Text>
 
 
                 <Text>Cantidad de posteos: {this.state.userPosts.length}</Text>
