@@ -12,7 +12,8 @@ class Post extends Component {
             cantidadDeLikes: this.props.postData.data.likes.length, //length del array de likes.
             miLike: false,
             cantidadDeComments: this.props.postData.data.comments.length,
-            comments: []
+            comments: [],
+            isMyPost: false,
         }
     }
 
@@ -24,6 +25,7 @@ class Post extends Component {
                 miLike: true
             })
         }
+        this.checkIsMyPost();
     }
 
     like() {
@@ -55,6 +57,21 @@ class Post extends Component {
             .catch(e => console.log(e))
     }
 
+    checkIsMyPost() {
+        this.setState({
+            isMyPost: this.props.postData.data.owner === auth.currentUser.email
+        })
+    }
+
+    borrarPost() {
+        db.collection("posts").doc(this.props.postData.id).delete().then(() => {
+            console.log("Document successfully deleted!");
+            this.props.refrescarPosts();
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    }
+
     render() {
         return (
             <View style={styles.fondo}>
@@ -75,10 +92,14 @@ class Post extends Component {
                         <Text style={styles.fourth}>LIKE</Text>
                     </TouchableOpacity>
                 }
-
                 <TouchableOpacity onPress={this.props.irAComments}>
                     <Text style={styles.first}>{this.props.postData.data.comments.length} Comentarios...</Text>
                 </TouchableOpacity>
+                { this.state.isMyPost ? (
+                    <TouchableOpacity onPress={() => this.borrarPost()}>
+                        <Text style={styles.first}>Borrar Post</Text>
+                    </TouchableOpacity>
+                ) : null}
             </View>
         )
     }

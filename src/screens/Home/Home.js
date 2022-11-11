@@ -14,6 +14,11 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        this.getPosts.bind(this);
+        this.getPosts();
+    }
+
+    getPosts() {
         db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(
             docs => {
                 let posts = [];
@@ -53,7 +58,7 @@ class Home extends Component {
                 <FlatList style={styles.fondo}
                     data={this.state.posts}
                     keyExtractor={onePost => onePost.id.toString()}
-                    renderItem={({ item }) => <Post postData={item} irAComments={ () => this.irAComments()} />}
+                    renderItem={({ item }) => <Post postData={item} irAComments={ () => this.irAComments()} refrescarPosts={this.getPosts} />}
                 />
                 <TouchableOpacity onPress={() => this.logout()} >
                     <Text style={styles.logout}>Log out</Text>
