@@ -9,7 +9,8 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: []
+            posts: [],
+            postID: ''
         }
     }
 
@@ -28,7 +29,8 @@ class Home extends Component {
                         data: doc.data()
                     })
                     this.setState({
-                        posts: posts
+                        posts: posts,
+                        postID: doc.id
                     })
                 })
             }
@@ -41,7 +43,7 @@ class Home extends Component {
     }
 
     irAComments() {
-        this.props.navigation.navigate("Comments")
+        this.props.navigation.navigate("Comments", {id: this.state.postID})
     }
 
     render() {
