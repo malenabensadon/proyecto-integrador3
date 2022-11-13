@@ -80,7 +80,11 @@ class Post extends Component {
                     source={{ uri: this.props.postData.data.photo }}
                     resizeMode='cover'
                 />
-                <Text style={styles.first}>{this.props.postData.data.userName}:</Text>
+               
+                {/* <TouchableOpacity style={styles.first} onPress={()=> this.props.navigation.navigate('Perfil',{email:this.props.postData.data.owner}) }>
+            <Text  style={styles.first}>{this.props.postData.data.userName} </Text> 
+            </TouchableOpacity>*/}
+            <Text  style={styles.first}>{this.props.postData.data.userName} </Text> 
                 <Text style={styles.second}>{this.props.postData.data.textoPost}</Text>
                 <Text style={styles.third}>Likes: {this.state.cantidadDeLikes}</Text>
                 {this.state.miLike ?
@@ -124,8 +128,7 @@ const styles = StyleSheet.create({
     },
     first: {
         color: 'white',
-        alignContent: 'center',
-        marginLeft: 80,
+        textAlign: 'center',
         flex: 1,
         flexDirection: 'row'
 
