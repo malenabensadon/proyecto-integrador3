@@ -5,6 +5,7 @@ import { View,
          TextInput,
          TouchableOpacity,
         StyleSheet } from 'react-native';
+import MyCamera from '../../components/MyCamera/MyCamera';
 
 class Register extends Component {
     constructor(){
@@ -13,6 +14,7 @@ class Register extends Component {
             email:'',
             pass:'',
             userName:'',
+            foto:'',
             bio:'',
             errors: {
                 field: '',
@@ -22,7 +24,7 @@ class Register extends Component {
         }
     }
 
-    registerUser(email, pass, userName, bio){
+    registerUser(email, pass, userName, bio, foto){
         //Registrar en firebase y si el reigstro sale bien redireccionar a Home
         auth.createUserWithEmailAndPassword(email, pass)
             .then( res => {
@@ -30,6 +32,7 @@ class Register extends Component {
                     owner: email,
                     userName: userName,
                     bio: bio,
+                    foto: foto,
                     createdAt: Date.now()
                 })
                 .then(() => {
@@ -66,6 +69,13 @@ class Register extends Component {
             })
     }
 
+    onImageUpload(url){
+        this.setState({
+            foto: url,
+            showCamera: false,
+        })
+        
+    }
 
 
     render(){
@@ -103,6 +113,16 @@ class Register extends Component {
                         onChangeText={ text => this.setState({bio:text}) }
                         value={this.state.bio}
                     />   
+                   {/*  {
+                        this.state.showCamera ?
+                        <View style={{width: '80vw', heigth: '80vh'}}>
+                            <MyCamera onImageUpload={url => this.onImageUpload(url)}/> 
+                        </View> 
+                        :
+                        <TouchableOpacity onPress={()=> this.setState({showCamera:true})}>
+                            <Text style={style.camera}>Subir foto de perfil</Text>
+                        </TouchableOpacity>
+                    } */}
 
                     <TouchableOpacity
                         onPress={()=> this.registerUser(
@@ -163,6 +183,9 @@ const style = StyleSheet.create({
         backgroundColor: 'rgb(255,255,255)',
         padding: 10,
         margin: 10
+    },
+    camera:{
+        color: 'black'
     }
 });
 

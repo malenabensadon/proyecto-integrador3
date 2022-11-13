@@ -59,8 +59,8 @@ class Comments extends Component {
         console.log(this.state.postID)
         console.log(this.state.comments)
         return (
-            <View >
-                 <TextInput 
+            <View style={style.container}>
+                 <TextInput style={style.input}
                             placeholder='Add a comment'
                             keyboardType='default'
                             //poner propiedad para transformarlo en textArea
@@ -68,13 +68,42 @@ class Comments extends Component {
                             value={this.state.text}
                     /> 
                     <TouchableOpacity onPress={()=> this.createComment(this.state.text)}>
-                        <Text> Comment </Text>
+                        <Text style={style.btnLogin}>Comment</Text>
                     </TouchableOpacity>
             </View>
             
         )
     };
 }
+const style = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white',
+        color: 'rgb(255,255,255)',
+        padding: 15,
+        justifyContent: 'center',
+        textAlign: 'center',
+    },
+    btnLogin: {
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'rgb(180, 37, 130)',
+        backgroundColor: 'rgb(0,0,0)',
+        margin: 10,
+        padding: 10,
+        textAlign: 'center',
+        color: 'white'
+    },
+    input: {
+        color: 'rgb(0,0,0)',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'rgb(0,0,0)',
+        backgroundColor: 'rgb(255,255,255)',
+        padding: 10,
+        margin: 10
+    }
+});
 
 
 export default Comments;

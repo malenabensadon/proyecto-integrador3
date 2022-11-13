@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Image, FlatList } from 'react
 
 import { auth, db } from '../../firebase/config';
 import firebase from 'firebase';
+import { FontAwesome } from '@expo/vector-icons';
 
 
 class Post extends Component {
@@ -84,24 +85,25 @@ class Post extends Component {
                 {/* <TouchableOpacity style={styles.first} onPress={()=> this.props.navigation.navigate('Perfil',{email:this.props.postData.data.owner}) }>
             <Text  style={styles.first}>{this.props.postData.data.userName} </Text> 
             </TouchableOpacity>*/}
-            <Text  style={styles.first}>{this.props.postData.data.userName} </Text> 
-                <Text style={styles.second}>{this.props.postData.data.textoPost}</Text>
-                <Text style={styles.third}>Likes: {this.state.cantidadDeLikes}</Text>
-                {this.state.miLike ?
-                    <TouchableOpacity onPress={() => this.unlike()}>
-                        <Text style={styles.fourth}>DISLIKE</Text>
+             {this.state.miLike ?
+                    <TouchableOpacity style={styles.like} onPress={() => this.unlike()}>
+                         <FontAwesome name='heart' color='#E4127E' size={20} />
                     </TouchableOpacity>
                     :
-                    <TouchableOpacity onPress={() => this.like()}>
-                        <Text style={styles.fourth}>LIKE</Text>
+                    <TouchableOpacity style={styles.like} onPress={() => this.like()}>
+                         <FontAwesome name='heart-o' color='#E4127E' size={20} />
                     </TouchableOpacity>
                 }
+            <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text> 
+                {/* <Text style={styles.second}>{this.props.postData.data.textoPost}</Text> */}
+                <Text style={styles.third}>Likes: {this.state.cantidadDeLikes}</Text>
+               
                 <TouchableOpacity onPress={this.props.irAComments}>
-                    <Text style={styles.first}>{this.props.postData.data.comments.length} Comentarios...</Text>
+                    <Text style={styles.fourth}>{this.props.postData.data.comments.length} Comments...</Text>
                 </TouchableOpacity>
                 { this.state.isMyPost ? (
-                    <TouchableOpacity onPress={() => this.borrarPost()}>
-                        <Text style={styles.first}>Borrar Post</Text>
+                    <TouchableOpacity style={styles.trash} onPress={() => this.borrarPost()}>
+                        <FontAwesome name='trash' color='white' size={18} />
                     </TouchableOpacity>
                 ) : null}
             </View>
@@ -115,8 +117,13 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         marginLeft: 10,
         marginBottom: 15,
-        borderRadius: 8
+        borderRadius: 8,
+        marginTop: 10
+    },
 
+    like:{
+        marginLeft: 15,
+        marginBottom: 4
     },
 
     fondo: {
@@ -125,18 +132,23 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         margin: 15,
+      //  borderColor: 'rgb(228, 18, 126)',
+      //  borderWidth: 1,
+
     },
     first: {
         color: 'white',
-        textAlign: 'center',
+       // textAlign: 'center',
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        fontWeight: 600,
+        marginLeft: 15
 
     },
     second: {
         color: 'white',
         alignContent: 'center',
-        marginLeft: 80,
+        marginLeft: 15,
         flex: 2,
         flexDirection: 'row'
 
@@ -144,12 +156,16 @@ const styles = StyleSheet.create({
     third: {
         color: 'white',
         alignContent: 'center',
-        marginLeft: 80,
+        marginLeft: 15,
     },
     fourth: {
         color: 'white',
         alignContent: 'center',
-        marginLeft: 80,
+        marginLeft: 15,
+    },
+    trash: {
+        marginTop: 3,
+        marginLeft: 15,
     }
 
 

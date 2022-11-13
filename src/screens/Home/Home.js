@@ -77,8 +77,13 @@ const styles = StyleSheet.create({
 
     },
     logout: {
-        color: 'white',
-        backgroundColor: 'black'
+        color: 'rgb(0,0,0)',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'rgb(0,0,0)',
+        backgroundColor: 'rgb(255,255,255)',
+        padding: 10,
+        margin: 10
 
     },
     titulos: {

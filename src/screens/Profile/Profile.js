@@ -19,6 +19,7 @@ class Profile extends Component {
             userName: '',
             currentPassword: '',
             newPassword: '',
+        //    foto:'',
             bio: '',
             userId: '',
             editSucces: false
@@ -110,6 +111,11 @@ class Profile extends Component {
                         <Text style={styles.textos}>{this.state.userName}</Text>
                         <Text style={styles.textos2}>{this.state.email}</Text>
                         <Text style={styles.textos2}>{this.state.bio}</Text>
+                       {/*  <Image
+                style={styles.foto}
+                source={this.state.user[0].data.foto}
+                resizeMode='cover'
+                /> */}
                     </View>
 
                     <Text style={styles.textos2}>Cantidad de posteos: {this.state.userPosts.length}</Text>

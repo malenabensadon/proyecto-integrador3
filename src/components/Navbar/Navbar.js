@@ -24,7 +24,7 @@ function Navbar(){
 }
 const styles = StyleSheet.create({
     logo:{
-        height:200, 
+        height:150, 
     }, 
     nav: {
         backgroundColor:'rgb(0,0,0)'
