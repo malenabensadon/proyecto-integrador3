@@ -11,20 +11,20 @@ import Profile from '../../screens/Profile/Profile';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-function HomeMenu(){
+function HomeMenu() {
     return (
-        <Tab.Navigator screenOptions={{tabBarShowLabel: false}}>
-            <Tab.Screen name="HomeStack" component={ HomeStack } options={
-                    {
-                        tabBarIcon: ()=> <AntDesign name="home" size={24} color="black" />
-                    }
-                }/>
-            <Tab.Screen name="NewPost" component={ NewPost } options={
-                    {tabBarIcon: ()=> <AntDesign name="pluscircleo" size={24} color="black" /> }
-                }/>
-            <Tab.Screen name="Profile" component={ Profile } options={
-                    {tabBarIcon: ()=> <AntDesign name="user" size={24} color="black" /> }
-                }/>
+        <Tab.Navigator screenOptions={{ tabBarShowLabel: false }}>
+            <Tab.Screen name="HomeStack" component={HomeStack} options={
+                {
+                    tabBarIcon: () => <AntDesign name="home" size={24} color="black" />
+                }
+            } />
+            <Tab.Screen name="NewPost" component={NewPost} options={
+                { tabBarIcon: () => <AntDesign name="pluscircleo" size={24} color="black" /> }
+            } />
+            <Tab.Screen name="Profile" component={Profile} options={
+                { tabBarIcon: () => <AntDesign name="user" size={24} color="black" /> }
+            } />
         </Tab.Navigator>
     )
 }
@@ -32,8 +32,8 @@ function HomeMenu(){
 function HomeStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={ Home } options={{headerShown: false}}/>
-            <Stack.Screen name="Comments" component={ Comments } options={{headerShown: false}}/>
+            <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+            <Stack.Screen name="Comments" component={Comments} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

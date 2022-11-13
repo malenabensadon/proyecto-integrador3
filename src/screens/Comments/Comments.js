@@ -17,40 +17,40 @@ class Comments extends Component {
         }
     };
 
-    componentDidMount(){
+    componentDidMount() {
         db
-        .collection('posts')
-        .doc(this.props.route.params.id) //tenemos que trer bien el id 
-        .onSnapshot(
-            doc => {
-                console.log(doc.data()) //me trae siempre la info del mismo post 
-                this.setState({
-                    data: doc.data(),
-                    postID: doc.id
-                    //comments: doc.data().comments
-                })
+            .collection('posts')
+            .doc(this.props.route.params.id) //tenemos que trer bien el id 
+            .onSnapshot(
+                doc => {
+                    console.log(doc.data()) //me trae siempre la info del mismo post 
+                    this.setState({
+                        data: doc.data(),
+                        postID: doc.id
+                        //comments: doc.data().comments
+                    })
 
-            }
-        )
+                }
+            )
 
     }
 
     createComment(text) {
         db
-        .collection('posts')
-        .doc(this.state.postID) //identificar bien el documento porque trae siempre el mismo
-        .update({
-            comments: firebase.firestore.FieldValue.arrayUnion({
-                comment: text,
-                username: auth.currentUser.email, //en realidad, mejor traer el username 
-                createdAt: Date.now()
+            .collection('posts')
+            .doc(this.state.postID) //identificar bien el documento porque trae siempre el mismo
+            .update({
+                comments: firebase.firestore.FieldValue.arrayUnion({
+                    comment: text,
+                    username: auth.currentUser.email, //en realidad, mejor traer el username 
+                    createdAt: Date.now()
+                })
             })
-        })
-        .then(() => this.setState({
+            .then(() => this.setState({
                 cantComments: this.state.cantComments + 1 //arreglar el estado como para que nos traiga la length del array
             })
-        )
-        .catch(e => console.log(e))
+            )
+            .catch(e => console.log(e))
     }
 
 
@@ -60,18 +60,18 @@ class Comments extends Component {
         console.log(this.state.comments)
         return (
             <View style={style.container}>
-                 <TextInput style={style.input}
-                            placeholder='Add a comment'
-                            keyboardType='default'
-                            //poner propiedad para transformarlo en textArea
-                            onChangeText={ text => this.setState({text: text}) }
-                            value={this.state.text}
-                    /> 
-                    <TouchableOpacity onPress={()=> this.createComment(this.state.text)}>
-                        <Text style={style.btnLogin}>Comment</Text>
-                    </TouchableOpacity>
+                <TextInput style={style.input}
+                    placeholder='Add a comment'
+                    keyboardType='default'
+                    //poner propiedad para transformarlo en textArea
+                    onChangeText={text => this.setState({ text: text })}
+                    value={this.state.text}
+                />
+                <TouchableOpacity onPress={() => this.createComment(this.state.text)}>
+                    <Text style={style.btnLogin}>Comment</Text>
+                </TouchableOpacity>
             </View>
-            
+
         )
     };
 }

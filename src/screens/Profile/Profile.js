@@ -19,7 +19,7 @@ class Profile extends Component {
             userName: '',
             currentPassword: '',
             newPassword: '',
-        //    foto:'',
+            //    foto:'',
             bio: '',
             userId: '',
             editSucces: false
@@ -111,7 +111,7 @@ class Profile extends Component {
                         <Text style={styles.textos}>{this.state.userName}</Text>
                         <Text style={styles.textos2}>{this.state.email}</Text>
                         <Text style={styles.textos2}>{this.state.bio}</Text>
-                       {/*  <Image
+                        {/*  <Image
                 style={styles.foto}
                 source={this.state.user[0].data.foto}
                 resizeMode='cover'
@@ -170,42 +170,42 @@ const styles = StyleSheet.create({
         fontFamily: 'Oswald, sans-serif',
         fontWeight: 'bold',
         fontSize: 25,
-        textAlign:'center',
+        textAlign: 'center',
     },
-    container:{
-        backgroundColor:'black',
+    container: {
+        backgroundColor: 'black',
         flex: 1
     },
-    textos2:{
-        color:'white',
+    textos2: {
+        color: 'white',
         fontFamily: 'Oswald, sans-serif',
         fontWeight: 'bold',
         fontSize: 10,
-        textAlign:'center',
+        textAlign: 'center',
         margin: 2,
     },
-    titulo:{
-        color:'white'
+    titulo: {
+        color: 'white'
     },
-    textos3:{
-        color:'white',
+    textos3: {
+        color: 'white',
         fontFamily: 'Oswald, sans-serif',
         fontWeight: 'bold',
         fontSize: 20,
-        textAlign:'center',
+        textAlign: 'center',
     },
-    textos4:{
-        color:'white',
+    textos4: {
+        color: 'white',
         fontFamily: 'Oswald, sans-serif',
         fontWeight: 'bold',
         fontSize: 15,
-        textAlign:'center',
+        textAlign: 'center',
     },
-    input:{
-        color:'white',
+    input: {
+        color: 'white',
         fontFamily: 'Oswald, sans-serif',
         fontSize: 10,
-        textAlign:'center',
+        textAlign: 'center',
         margin: 4
 
     }

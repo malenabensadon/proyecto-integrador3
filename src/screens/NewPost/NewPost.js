@@ -1,22 +1,22 @@
-import React, {Component} from 'react'
-import {Text, TextInput, TouchableOpacity,View} from 'react-native';
-import {auth, db} from '../../firebase/config';
+import React, { Component } from 'react'
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { auth, db } from '../../firebase/config';
 import MyCamera from '../../components/MyCamera/MyCamera';
 import { StyleSheet } from 'react-native-web';
 
 
-class NewPost extends Component{
-    constructor(){
+class NewPost extends Component {
+    constructor() {
         super()
-        this.state={
-            textoPost:'',
-            createdAt:'',
-            photo:'',
+        this.state = {
+            textoPost: '',
+            createdAt: '',
+            photo: '',
             showCamera: true,
         }
     }
 
-    createPost(texto, photo){
+    createPost(texto, photo) {
         db.collection('users').where('owner', '==', auth.currentUser.email)
             .onSnapshot(users => {
                 if (users.docs.length > 0) {
@@ -25,53 +25,53 @@ class NewPost extends Component{
                         userName: users.docs[0].data().userName,
                         textoPost: texto,
                         photo: photo,
-                        likes:[],
-                        comments:[],
+                        likes: [],
+                        comments: [],
                         createdAt: Date.now()
                     })
-                    .then(() => {
-                        this.setState({
-                            textoPost:'',
-                            showCamera: true,
+                        .then(() => {
+                            this.setState({
+                                textoPost: '',
+                                showCamera: true,
+                            })
+                            this.props.navigation.navigate('Home')
                         })
-                        this.props.navigation.navigate('Home')
-                    })
-                    .catch( e => console.log(e))
+                        .catch(e => console.log(e))
                 }
             })
     }
 
-    onImageUpload(url){
+    onImageUpload(url) {
         this.setState({
             photo: url,
             showCamera: false,
         })
     }
 
-    render(){
+    render() {
         console.log(auth.currentUser.email);
-        return(
+        return (
             <View style={style.container}>
-            {
-                this.state.showCamera ?
-                 <MyCamera onImageUpload={url => this.onImageUpload(url)}/>
-                 :
-                <View style={style.container}>
-                    <Text style={style.title}>New Post</Text>
-                    <View style={style.container}>
-                        <TextInput style={style.description} 
-                            placeholder='Escribe lo que quieras compartir'
-                            keyboardType='default'
-                            //poner propiedad para transformarlo en textArea
-                            onChangeText={ text => this.setState({textoPost:text}) }
-                            value={this.state.textoPost}
-                        /> 
-                        <TouchableOpacity style={style.mostrarCamara} onPress={()=>this.createPost(this.state.textoPost, this.state.photo)}>
-                            <Text style={style.textBtn}>Guardar</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            }
+                {
+                    this.state.showCamera ?
+                        <MyCamera onImageUpload={url => this.onImageUpload(url)} />
+                        :
+                        <View style={style.container}>
+                            <Text style={style.title}>New Post</Text>
+                            <View style={style.container}>
+                                <TextInput style={style.description}
+                                    placeholder='Escribe lo que quieras compartir'
+                                    keyboardType='default'
+                                    //poner propiedad para transformarlo en textArea
+                                    onChangeText={text => this.setState({ textoPost: text })}
+                                    value={this.state.textoPost}
+                                />
+                                <TouchableOpacity style={style.mostrarCamara} onPress={() => this.createPost(this.state.textoPost, this.state.photo)}>
+                                    <Text style={style.textBtn}>Guardar</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                }
             </View>
         )
     }

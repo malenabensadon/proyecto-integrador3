@@ -1,33 +1,35 @@
 import React, { Component } from 'react';
-import {auth, db} from '../../firebase/config';
-import { View,
-         Text,
-         TextInput,
-         TouchableOpacity,
-        StyleSheet } from 'react-native';
+import { auth, db } from '../../firebase/config';
+import {
+    View,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    StyleSheet
+} from 'react-native';
 import MyCamera from '../../components/MyCamera/MyCamera';
 
 class Register extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
-            email:'',
-            pass:'',
-            userName:'',
-            foto:'',
-            bio:'',
+            email: '',
+            pass: '',
+            userName: '',
+            foto: '',
+            bio: '',
             errors: {
                 field: '',
                 message: ''
             }
-            
+
         }
     }
 
-    registerUser(email, pass, userName, bio, foto){
+    registerUser(email, pass, userName, bio, foto) {
         //Registrar en firebase y si el reigstro sale bien redireccionar a Home
         auth.createUserWithEmailAndPassword(email, pass)
-            .then( res => {
+            .then(res => {
                 db.collection('users').add({
                     owner: email,
                     userName: userName,
@@ -35,23 +37,23 @@ class Register extends Component {
                     foto: foto,
                     createdAt: Date.now()
                 })
-                .then(() => {
-                    this.setState({
-                        email:'',
-                        pass:'',
-                        userName:'',
-                        bio:'',
-                        errors: {
-                            field: '',
-                            message: ''
-                        }                        
+                    .then(() => {
+                        this.setState({
+                            email: '',
+                            pass: '',
+                            userName: '',
+                            bio: '',
+                            errors: {
+                                field: '',
+                                message: ''
+                            }
+                        })
+
+                        this.props.navigation.navigate('HomeMenu')
                     })
 
-                    this.props.navigation.navigate('HomeMenu')
-                })
-               
-              
-                
+
+
             })
             .catch(error => {
                 let errorField = ''
@@ -60,7 +62,7 @@ class Register extends Component {
                 } else if (error.code === 'auth/weak-password') {
                     errorField = "password"
                 }
-                this.setState ({
+                this.setState({
                     errors: {
                         field: errorField,
                         message: error.message
@@ -69,51 +71,51 @@ class Register extends Component {
             })
     }
 
-    onImageUpload(url){
+    onImageUpload(url) {
         this.setState({
             foto: url,
             showCamera: false,
         })
-        
+
     }
 
 
-    render(){
-        return(
-            <View style={style.container}> 
+    render() {
+        return (
+            <View style={style.container}>
                 <Text style={style.title}>Register</Text>
                 <View>
-                    <TextInput  style={style.input}
+                    <TextInput style={style.input}
                         placeholder='Email'
                         keyboardType='email-address'
-                        onChangeText={ text => this.setState({email:text}) }
+                        onChangeText={text => this.setState({ email: text })}
                         value={this.state.email}
                     />
                     {this.state.errors.field === 'email' && (
                         <Text> {this.state.errors.message} </Text>
                     )}
-                    <TextInput  style={style.input}
+                    <TextInput style={style.input}
                         placeholder='Password'
                         keyboardType='default'
-                        onChangeText={ text => this.setState({pass:text}) }
+                        onChangeText={text => this.setState({ pass: text })}
                         value={this.state.pass}
                     />
                     {this.state.errors.field === 'password' && (
                         <Text> {this.state.errors.message} </Text>
                     )}
-                    <TextInput  style={style.input}
+                    <TextInput style={style.input}
                         placeholder='Username'
                         keyboardType='default'
-                        onChangeText={ text => this.setState({userName:text}) }
+                        onChangeText={text => this.setState({ userName: text })}
                         value={this.state.userName}
                     />
-                    <TextInput  style={style.input}
+                    <TextInput style={style.input}
                         placeholder='Mini Bio'
                         keyboardType='default'
-                        onChangeText={ text => this.setState({bio:text}) }
+                        onChangeText={text => this.setState({ bio: text })}
                         value={this.state.bio}
-                    />   
-                   {/*  {
+                    />
+                    {/*  {
                         this.state.showCamera ?
                         <View style={{width: '80vw', heigth: '80vh'}}>
                             <MyCamera onImageUpload={url => this.onImageUpload(url)}/> 
@@ -125,12 +127,12 @@ class Register extends Component {
                     } */}
 
                     <TouchableOpacity
-                        onPress={()=> this.registerUser(
-                                this.state.email,
-                                this.state.pass,
-                                this.state.userName,
-                                this.state.bio
-                            )
+                        onPress={() => this.registerUser(
+                            this.state.email,
+                            this.state.pass,
+                            this.state.userName,
+                            this.state.bio
+                        )
                         }
                         style={{
                             opacity: (this.state.email === '' || this.state.pass === '')
@@ -142,12 +144,12 @@ class Register extends Component {
                     >
                         <Text style={style.text}>Registrarme</Text>
                     </TouchableOpacity>
-                    <Text onPress={ () => this.props.navigation.navigate('Login')} style={style.btnLoginTxt}>Iniciar Sesion</Text>     
+                    <Text onPress={() => this.props.navigation.navigate('Login')} style={style.btnLoginTxt}>Iniciar Sesion</Text>
                 </View>
             </View>
         )
     }
-    
+
 }
 const style = StyleSheet.create({
     container: {
@@ -184,7 +186,7 @@ const style = StyleSheet.create({
         padding: 10,
         margin: 10
     },
-    camera:{
+    camera: {
         color: 'black'
     }
 });

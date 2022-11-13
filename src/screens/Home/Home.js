@@ -43,14 +43,14 @@ class Home extends Component {
     }
 
     irAComments() {
-        this.props.navigation.navigate("Comments", {id: this.state.postID})
+        this.props.navigation.navigate("Comments", { id: this.state.postID })
     }
 
     render() {
         return (
             <>
                 <Navbar />
-               {/*  <Text style={styles.titulos}>Home</Text>
+                {/*  <Text style={styles.titulos}>Home</Text>
                 <Text style={styles.titulos}>Lista de posteos </Text>
 
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('NewPost')}>
@@ -60,7 +60,7 @@ class Home extends Component {
                 <FlatList style={styles.fondo}
                     data={this.state.posts}
                     keyExtractor={onePost => onePost.id.toString()}
-                    renderItem={({ item }) => <Post postData={item} irAComments={ () => this.irAComments()} refrescarPosts={this.getPosts} />}
+                    renderItem={({ item }) => <Post postData={item} irAComments={() => this.irAComments()} refrescarPosts={this.getPosts} />}
                 />
                 <TouchableOpacity onPress={() => this.logout()} >
                     <Text style={styles.logout}>Log out</Text>

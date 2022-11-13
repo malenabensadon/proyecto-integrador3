@@ -81,27 +81,27 @@ class Post extends Component {
                     source={{ uri: this.props.postData.data.photo }}
                     resizeMode='cover'
                 />
-               
+
                 {/* <TouchableOpacity style={styles.first} onPress={()=> this.props.navigation.navigate('Perfil',{email:this.props.postData.data.owner}) }>
             <Text  style={styles.first}>{this.props.postData.data.userName} </Text> 
             </TouchableOpacity>*/}
-             {this.state.miLike ?
+                {this.state.miLike ?
                     <TouchableOpacity style={styles.like} onPress={() => this.unlike()}>
-                         <FontAwesome name='heart' color='#E4127E' size={20} />
+                        <FontAwesome name='heart' color='#E4127E' size={20} />
                     </TouchableOpacity>
                     :
                     <TouchableOpacity style={styles.like} onPress={() => this.like()}>
-                         <FontAwesome name='heart-o' color='#E4127E' size={20} />
+                        <FontAwesome name='heart-o' color='#E4127E' size={20} />
                     </TouchableOpacity>
                 }
-            <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text> 
+                <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text>
                 {/* <Text style={styles.second}>{this.props.postData.data.textoPost}</Text> */}
                 <Text style={styles.third}>Likes: {this.state.cantidadDeLikes}</Text>
-               
+
                 <TouchableOpacity onPress={this.props.irAComments}>
                     <Text style={styles.fourth}>{this.props.postData.data.comments.length} Comments...</Text>
                 </TouchableOpacity>
-                { this.state.isMyPost ? (
+                {this.state.isMyPost ? (
                     <TouchableOpacity style={styles.trash} onPress={() => this.borrarPost()}>
                         <FontAwesome name='trash' color='white' size={18} />
                     </TouchableOpacity>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
 
-    like:{
+    like: {
         marginLeft: 15,
         marginBottom: 4
     },
@@ -132,13 +132,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         margin: 15,
-      //  borderColor: 'rgb(228, 18, 126)',
-      //  borderWidth: 1,
+        //  borderColor: 'rgb(228, 18, 126)',
+        //  borderWidth: 1,
 
     },
     first: {
         color: 'white',
-       // textAlign: 'center',
+        // textAlign: 'center',
         flex: 1,
         flexDirection: 'row',
         fontWeight: 600,

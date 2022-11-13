@@ -1,33 +1,33 @@
 import { black } from "kleur";
-import react, {Component} from "react";
-import {View, Text, TouchableOpacity, StyleSheet, Image} from "react-native"
+import react, { Component } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native"
 import { Button } from "react-native-web";
 
-function Navbar(){
+function Navbar() {
     return (
         <View>
-        <nav className="headerDesktop" style = {styles.nav}>
-            <div className="logoBeFoodie">
-            <Image style = {styles.logo} 
-                source={require("../../../assets/logoartist.png")}
-                resizeMode='contain'/>
-            </div>
+            <nav className="headerDesktop" style={styles.nav}>
+                <div className="logoBeFoodie">
+                    <Image style={styles.logo}
+                        source={require("../../../assets/logoartist.png")}
+                        resizeMode='contain' />
+                </div>
 
-            {/* <div className="perfilLogo">
+                {/* <div className="perfilLogo">
             <Image style = {styles.perfil} 
                 source={require("../../../assets/user.png")}
                 resizeMode='contain'/>
             </div> */}
-        </nav>
+            </nav>
         </View>
     )
 }
 const styles = StyleSheet.create({
-    logo:{
-        height:150, 
-    }, 
+    logo: {
+        height: 150,
+    },
     nav: {
-        backgroundColor:'rgb(0,0,0)'
+        backgroundColor: 'rgb(0,0,0)'
     }
 
 })
