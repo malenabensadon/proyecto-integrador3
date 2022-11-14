@@ -13,6 +13,7 @@ class Comments extends Component {
             cantComments: 0,
             postID: '',
             data: {},
+            username: ''
             // .data.comments.length
         }
     };
@@ -29,6 +30,13 @@ class Comments extends Component {
     }
 
     createComment(text) {
+        db.collection('users')
+            .doc(auth.currentUser.id)
+            .then(() => this.setState({
+                username: auth.currentUser.userName //arreglar el estado como para que nos traiga la length del array
+            }))
+
+
         db.collection('posts')
             .doc(this.state.postID) //identificar bien el documento porque trae siempre el mismo
             .update({
@@ -49,6 +57,8 @@ class Comments extends Component {
     render() {
         console.log(this.props)
         console.log(this.state)
+        console.log(this.state.username)
+        console.log(auth.currentUser)
         return (
             <View style={style.container}>
 
