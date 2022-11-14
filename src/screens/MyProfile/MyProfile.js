@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { updatePassword } from "firebase/auth";
+import firebase from 'firebase';
 import { auth, db } from '../../firebase/config';
 import {
     View,
@@ -23,7 +23,8 @@ class MyProfile extends Component {
             foto:'',
             bio: '',
             userId: '',
-            editSucces: false
+            editSucces: false,
+            err: ''
         }
     }
 
@@ -80,22 +81,23 @@ class MyProfile extends Component {
             .catch(e => console.log(e))
     }
 
-    reauthenticate = (user, currentPassword) => {
-        auth.signInWithEmailAndPassword(user.email, currentPassword).then((cred) => {
-            console.log(cred);
-            return user.reauthenticateWithCredential(cred);
-        })
-    }
-
     editProfile() {
         if (this.state.password !== '') {
-            const user = auth.currentUser;
-            // this.reauthenticate(user, this.state.currentPassword)
-            //     .then(() => {
-            //         user.updatePassword(this.state.newPassword).then(() => {
-            //             this.updateProfileInfo();
-            //         }).catch((e) => console.log(e))
-            //     }).catch((e) => console.log(e))
+
+            auth.signInWithEmailAndPassword(auth.currentUser.email, this.state.currentPassword)
+            .then(res => {
+                const user = firebase.auth().currentUser;
+    
+                user.updatePassword(this.state.newPassword)
+                .then(res => {
+                    this.updateProfileInfo();
+                })
+                .catch(err => console.log(err))
+            })
+            .catch(err => this.setState({
+                err: err.message
+            }))
+
         } else {
             this.updateProfileInfo();
         }
@@ -151,6 +153,7 @@ class MyProfile extends Component {
                         onChangeText={text => this.setState({ newPassword: text })}
                         value={this.state.newPassword}
                     />
+                    <Text style={styles.textos}>{this.state.err}</Text>
                     <TouchableOpacity onPress={() => this.editProfile()}>
                         <Text style={styles.textos3}>Editar</Text>
                     </TouchableOpacity>
