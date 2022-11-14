@@ -97,7 +97,7 @@ class Post extends Component {
                 {/* <Text style={styles.second}>{this.props.postData.data.textoPost}</Text> */}
                 <Text style={styles.third}>Likes: {this.state.cantidadDeLikes}</Text>
 
-                <TouchableOpacity onPress={this.props.irAComments}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments', {data: this.props.postData}, {username: this.props.postData.data.userName}) }>
                     <Text style={styles.fourth}>{this.props.postData.data.comments.length} Comments...</Text>
                 </TouchableOpacity>
                 {this.state.isMyPost ? (

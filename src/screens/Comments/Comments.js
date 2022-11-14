@@ -18,26 +18,18 @@ class Comments extends Component {
     };
 
     componentDidMount() {
-        db
-            .collection('posts')
-            .doc(this.props.route.params.id) //tenemos que trer bien el id 
-            .onSnapshot(
-                doc => {
-                    console.log(doc.data()) //me trae siempre la info del mismo post 
-                    this.setState({
-                        data: doc.data(),
-                        postID: doc.id
-                        //comments: doc.data().comments
-                    })
+        this.setState({
+            comments: this.props.route.params.data.data.comments,
+            postID: this.props.route.params.data.id
+            //comments: doc.data().comments
+        })
 
-                }
-            )
+        
 
     }
 
     createComment(text) {
-        db
-            .collection('posts')
+        db.collection('posts')
             .doc(this.state.postID) //identificar bien el documento porque trae siempre el mismo
             .update({
                 comments: firebase.firestore.FieldValue.arrayUnion({
@@ -55,11 +47,17 @@ class Comments extends Component {
 
 
     render() {
-        console.log(this.props.route.params.id)
-        console.log(this.state.postID)
-        console.log(this.state.comments)
+        console.log(this.props)
+        console.log(this.state)
         return (
             <View style={style.container}>
+
+            <FlatList 
+                data={this.state.comments}
+                keyExtractor={onePost => onePost.toString()}
+                renderItem={({ item }) => <Text onPress={()=> this.props.navigation.navigate('Profile')}>{item.username}: {item.comment}</Text>}
+            />
+
                 <TextInput style={style.input}
                     placeholder='Add a comment'
                     keyboardType='default'
@@ -68,7 +66,7 @@ class Comments extends Component {
                     value={this.state.text}
                 />
                 <TouchableOpacity onPress={() => this.createComment(this.state.text)}>
-                    <Text style={style.btnLogin}>Comment</Text>
+                    <Text style={style.btnLogin}> Comment </Text>
                 </TouchableOpacity>
             </View>
 
