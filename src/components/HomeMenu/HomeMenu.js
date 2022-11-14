@@ -8,6 +8,7 @@ import Home from '../../screens/Home/Home';
 import MyProfile from '../../screens/MyProfile/MyProfile';
 import NewPost from '../../screens/NewPost/NewPost';
 import Profile from '../../screens/Profile/Profile';
+import Navbar from '../Navbar/Navbar';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -24,6 +25,9 @@ function HomeMenu() {
                 { tabBarIcon: () => <AntDesign name="pluscircleo" size={24} color="black" /> }
             } />
             <Tab.Screen name="MyProfile" component={MyProfile} options={
+                { tabBarIcon: () => <AntDesign name="user" size={24} color="black" /> }
+            } />
+             <Tab.Screen name="Navbar" component={Navbar} options={
                 { tabBarIcon: () => <AntDesign name="user" size={24} color="black" /> }
             } />
         </Tab.Navigator>

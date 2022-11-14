@@ -13,7 +13,7 @@ class Comments extends Component {
             cantComments: 0,
             postID: '',
             data: {},
-            username: ''
+            // username: ''
             // .data.comments.length
         }
     };
@@ -25,16 +25,16 @@ class Comments extends Component {
             //comments: doc.data().comments
         })
 
-        
+
 
     }
 
     createComment(text) {
-        db.collection('users')
-            .doc(auth.currentUser.id)
-            .then(() => this.setState({
-                username: auth.currentUser.userName //arreglar el estado como para que nos traiga la length del array
-            }))
+        // db.collection('users')
+        //     .doc(auth.currentUser.id)
+        //     .then(() => this.setState({
+        //         username: auth.currentUser.userName //arreglar el estado como para que nos traiga la length del array
+        //     }))
 
 
         db.collection('posts')
@@ -62,11 +62,11 @@ class Comments extends Component {
         return (
             <View style={style.container}>
 
-            <FlatList 
-                data={this.state.comments}
-                keyExtractor={onePost => onePost.toString()}
-                renderItem={({ item }) => <Text onPress={()=> this.props.navigation.navigate('Profile')}>{item.username}: {item.comment}</Text>}
-            />
+                <FlatList
+                    data={this.state.comments}
+                    keyExtractor={onePost => onePost.toString()}
+                    renderItem={({ item }) => <Text onPress={() => this.props.navigation.navigate('Profile')}>{item.username}: {item.comment}</Text>}
+                />
 
                 <TextInput style={style.input}
                     placeholder='Add a comment'
