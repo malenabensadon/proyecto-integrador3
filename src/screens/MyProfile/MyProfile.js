@@ -82,11 +82,10 @@ class MyProfile extends Component {
     }
 
     editProfile() {
-        if (this.state.password !== '') {
-
+        if(this.state.newPassword !== '') {
             auth.signInWithEmailAndPassword(auth.currentUser.email, this.state.currentPassword)
             .then(res => {
-                const user = firebase.auth().currentUser;
+                const user = auth.currentUser;
     
                 user.updatePassword(this.state.newPassword)
                 .then(res => {
@@ -101,10 +100,12 @@ class MyProfile extends Component {
         } else {
             this.updateProfileInfo();
         }
+
     }
 
 
     render() {
+        console.log(this.state.newPassword);
         return (
             <>
                 <View style={styles.container}>
