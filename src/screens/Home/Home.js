@@ -15,7 +15,6 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        this.getPosts.bind(this);
         this.getPosts();
     }
 
@@ -60,7 +59,7 @@ class Home extends Component {
                 <FlatList style={styles.fondo}
                     data={this.state.posts}
                     keyExtractor={onePost => onePost.id.toString()}
-                    renderItem={({ item }) => <Post postData={item} irAComments={() => this.irAComments()} refrescarPosts={this.getPosts} />}
+                    renderItem={({ item }) => <Post postData={item} irAComments={() => this.irAComments()} navigation={this.props.navigation} />}
                 />
                 <TouchableOpacity onPress={() => this.logout()} >
                     <Text style={styles.logout}>Log out</Text>

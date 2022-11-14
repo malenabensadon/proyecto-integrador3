@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Comments from '../../screens/Comments/Comments';
 
 import Home from '../../screens/Home/Home';
+import MyProfile from '../../screens/MyProfile/MyProfile';
 import NewPost from '../../screens/NewPost/NewPost';
 import Profile from '../../screens/Profile/Profile';
 
@@ -22,7 +23,7 @@ function HomeMenu() {
             <Tab.Screen name="NewPost" component={NewPost} options={
                 { tabBarIcon: () => <AntDesign name="pluscircleo" size={24} color="black" /> }
             } />
-            <Tab.Screen name="Profile" component={Profile} options={
+            <Tab.Screen name="MyProfile" component={MyProfile} options={
                 { tabBarIcon: () => <AntDesign name="user" size={24} color="black" /> }
             } />
         </Tab.Navigator>
@@ -34,6 +35,7 @@ function HomeStack() {
         <Stack.Navigator>
             <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
             <Stack.Screen name="Comments" component={Comments} options={{ headerShown: false }} />
+            <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }}/>
         </Stack.Navigator>
     )
 }

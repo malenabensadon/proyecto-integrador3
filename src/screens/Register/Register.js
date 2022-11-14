@@ -26,15 +26,16 @@ class Register extends Component {
         }
     }
 
-    registerUser(email, pass, userName, bio, foto) {
+    registerUser() {
         //Registrar en firebase y si el reigstro sale bien redireccionar a Home
-        auth.createUserWithEmailAndPassword(email, pass)
+        auth.createUserWithEmailAndPassword(this.state.email, this.state.pass)
             .then(res => {
+                console.log(this.state.foto)
                 db.collection('users').add({
-                    owner: email,
-                    userName: userName,
-                    bio: bio,
-                    foto: foto,
+                    owner: this.state.email,
+                    userName: this.state.userName,
+                    bio: this.state.bio,
+                    foto: this.state.foto,
                     createdAt: Date.now()
                 })
                     .then(() => {
@@ -72,11 +73,11 @@ class Register extends Component {
     }
 
     onImageUpload(url) {
+        console.log(url)
         this.setState({
             foto: url,
             showCamera: false,
         })
-
     }
 
 
@@ -115,7 +116,7 @@ class Register extends Component {
                         onChangeText={text => this.setState({ bio: text })}
                         value={this.state.bio}
                     />
-                    {/*  {
+                     {
                         this.state.showCamera ?
                         <View style={{width: '80vw', heigth: '80vh'}}>
                             <MyCamera onImageUpload={url => this.onImageUpload(url)}/> 
@@ -124,16 +125,10 @@ class Register extends Component {
                         <TouchableOpacity onPress={()=> this.setState({showCamera:true})}>
                             <Text style={style.camera}>Subir foto de perfil</Text>
                         </TouchableOpacity>
-                    } */}
+                    }
 
                     <TouchableOpacity
-                        onPress={() => this.registerUser(
-                            this.state.email,
-                            this.state.pass,
-                            this.state.userName,
-                            this.state.bio
-                        )
-                        }
+                        onPress={() => this.registerUser()}
                         style={{
                             opacity: (this.state.email === '' || this.state.pass === '')
                                 ? 0.5 : 1

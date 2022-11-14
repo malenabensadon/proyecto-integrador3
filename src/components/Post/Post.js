@@ -67,7 +67,6 @@ class Post extends Component {
     borrarPost() {
         db.collection("posts").doc(this.props.postData.id).delete().then(() => {
             console.log("Document successfully deleted!");
-            this.props.refrescarPosts();
         }).catch((error) => {
             console.error("Error removing document: ", error);
         });
@@ -82,9 +81,9 @@ class Post extends Component {
                     resizeMode='cover'
                 />
 
-                {/* <TouchableOpacity style={styles.first} onPress={()=> this.props.navigation.navigate('Perfil',{email:this.props.postData.data.owner}) }>
-            <Text  style={styles.first}>{this.props.postData.data.userName} </Text> 
-            </TouchableOpacity>*/}
+                <TouchableOpacity style={styles.first} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
+                    <Text style={styles.first}>{this.props.postData.data.userName} </Text> 
+                </TouchableOpacity>
                 {this.state.miLike ?
                     <TouchableOpacity style={styles.like} onPress={() => this.unlike()}>
                         <FontAwesome name='heart' color='#E4127E' size={20} />

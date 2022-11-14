@@ -7,7 +7,8 @@ import {
     TextInput,
     TouchableOpacity,
     StyleSheet,
-    FlatList
+    FlatList,
+    Image
 } from 'react-native';
 import Post from '../../components/Post/Post';
 
@@ -19,7 +20,7 @@ class Profile extends Component {
             userName: '',
             currentPassword: '',
             newPassword: '',
-            //    foto:'',
+            foto:'',
             bio: '',
             userId: '',
             editSucces: false
@@ -33,7 +34,7 @@ class Profile extends Component {
     }
 
     getUserInfo() {
-        db.collection('users').where('owner', '==', auth.currentUser.email).onSnapshot(
+        db.collection('users').where('owner', '==', this.props.route.params.email).onSnapshot(
             docs => {
                 docs.forEach(doc => {
                     const user = doc.data();
@@ -41,7 +42,8 @@ class Profile extends Component {
                         userId: doc.id,
                         userName: user.userName,
                         email: user.owner,
-                        bio: user.bio
+                        bio: user.bio,
+                        foto: user.foto
                     })
                 });
             }
@@ -49,7 +51,7 @@ class Profile extends Component {
     }
 
     getUserPosts() {
-        db.collection('posts').where('owner', '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot(
+        db.collection('posts').where('owner', '==', this.props.route.params.email).orderBy('createdAt', 'desc').onSnapshot(
             docs => {
                 let posts = [];
                 docs.forEach(doc => {
@@ -102,8 +104,6 @@ class Profile extends Component {
 
     render() {
         return (
-
-
             <>
                 <View style={styles.container}>
                     <View style={{ backgroundColor: "black" }}>
@@ -111,51 +111,18 @@ class Profile extends Component {
                         <Text style={styles.textos}>{this.state.userName}</Text>
                         <Text style={styles.textos2}>{this.state.email}</Text>
                         <Text style={styles.textos2}>{this.state.bio}</Text>
-                        {/*  <Image
-                style={styles.foto}
-                source={this.state.user[0].data.foto}
-                resizeMode='cover'
-                /> */}
                     </View>
-
+                    <Image
+                        style={styles.foto}
+                        source={this.state.foto}
+                        resizeMode='cover'
+                    />
                     <Text style={styles.textos2}>Cantidad de posteos: {this.state.userPosts.length}</Text>
                     <FlatList
                         data={this.state.userPosts}
                         keyExtractor={onePost => onePost.id.toString()}
                         renderItem={({ item }) => <Post postData={item} irAComments={() => { }} refrescarPosts={this.getUserPosts} />}
                     />
-
-                    <Text style={styles.textos4}>Ingresa lo datos que quieras editar</Text>
-                    <TextInput style={styles.input}
-                        placeholder='Ingresa tu nuevo nombre de usuario'
-                        keyboardType='default'
-                        onChangeText={text => this.setState({ userName: text })}
-                        value={this.state.userName}
-                    />
-                    <TextInput style={styles.input}
-                        placeholder='Ingresa tu nueva biografia'
-                        keyboardType='default'
-                        onChangeText={text => this.setState({ bio: text })}
-                        value={this.state.bio}
-                    />
-                    <TextInput style={styles.input}
-                        placeholder='Ingresa tu actual contraseña'
-                        keyboardType='default'
-                        secureTextEntry
-                        onChangeText={text => this.setState({ currentPassword: text })}
-                        value={this.state.currentPassword}
-                    />
-                    <TextInput style={styles.input}
-                        placeholder='Ingresa tu nueva contraseña'
-                        keyboardType='default'
-                        secureTextEntry
-                        onChangeText={text => this.setState({ newPassword: text })}
-                        value={this.state.newPassword}
-                    />
-                    <TouchableOpacity onPress={() => this.editProfile()}>
-                        <Text style={styles.textos3}>Editar</Text>
-                    </TouchableOpacity>
-
                 </View>
             </>
         )
@@ -207,9 +174,11 @@ const styles = StyleSheet.create({
         fontSize: 10,
         textAlign: 'center',
         margin: 4
-
+    },
+    foto: {
+        flex: 1,
+        minHeight: 150,
     }
-
 })
 
 
