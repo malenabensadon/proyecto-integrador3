@@ -1,4 +1,4 @@
-/* import { Text, View, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native'
+import { Text, View, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native'
 import React, { Component } from 'react'
 import { db, auth } from "../../firebase/config"
 import firebase from 'firebase'
@@ -134,4 +134,4 @@ const style = StyleSheet.create({
     }
 });
 
-export default Search */
+export default Search 

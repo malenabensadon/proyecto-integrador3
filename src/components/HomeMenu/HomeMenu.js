@@ -9,7 +9,7 @@ import Home from '../../screens/Home/Home';
 import MyProfile from '../../screens/MyProfile/MyProfile';
 import NewPost from '../../screens/NewPost/NewPost';
 import Profile from '../../screens/Profile/Profile';
-//import Search from '../../screens/Search/Search';
+import Search from '../../screens/Search/Search';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -28,9 +28,9 @@ function HomeMenu() {
             <Tab.Screen name="MyProfile" component={MyProfile} options={
                 { tabBarIcon: () => <AntDesign name="user" size={24} color="black" /> }
             } />
-            {/* <Tab.Screen name="Search" component={ Search }  options={
+            {<Tab.Screen name="Search" component={ Search }  options={
                 {tabBarIcon: ()=> <FontAwesome name="search" size={24} color="black" />} 
-            } /> */}
+            } /> }
         </Tab.Navigator>
     )
 }
