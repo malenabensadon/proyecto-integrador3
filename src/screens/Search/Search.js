@@ -10,8 +10,8 @@ class Search extends Component {
         super(props)
         this.state = {
             users: [],
-            usersFiltrado: [],
-            textoUsuario: '',
+            userFilter: [],
+            userText: '',
             search: false
         }
     }
@@ -36,39 +36,39 @@ class Search extends Component {
         event.preventDefault()
 
         this.setState({
-            usersFiltrado: this.state.users.filter(users => users.data.userName.toLowerCase().includes(this.state.textoUsuario.toLowerCase())),
+            userFilter: this.state.users.filter(users => users.data.userName.toLowerCase().includes(this.state.userText.toLowerCase())),
             search: true,
         })
     }
 
     changes(event) {
         this.setState({
-            textoUsuario: event.target.value
+            userText: event.target.value
         })
     }
 
     borrarBuscador() {
         this.setState({
-            usersFiltrado: '',
-            textoUsuario: ''
+            userFilter: '',
+            userText: ''
         })
     }
 
     render() {
         console.log(this.state.users)
-        console.log(this.state.usersFiltrado)
+        console.log(this.state.userFilter)
         return (
             <View style={style.container}>
                 <TextInput style={style.input}
                     placeholder='Search'
                     keyboardType='default'
-                    onChangeText={text => this.setState({ textoUsuario: text })}
-                    value={this.state.textoUsuario}
+                    onChangeText={text => this.setState({ userText: text })}
+                    value={this.state.userText}
                     onChange={(event) => this.changes(event)}
                 />
 
                 {
-                    this.state.textoUsuario == '' ?
+                    this.state.userText == '' ?
                         <Text style={style.msj}>Fill in the empty field</Text> :
                         <View>
                             <TouchableOpacity onPress={(event) => this.evitarSubmit(event)}>
@@ -76,11 +76,11 @@ class Search extends Component {
                             </TouchableOpacity>
                         </View>
                 }
-                {this.state.usersFiltrado.length == 0 && this.state.search == true ?
+                {this.state.userFilter.length == 0 && this.state.search == true ?
                     <Text style={style.msj}>No results matching your search</Text> :
                     <View>
                         <FlatList
-                            data={this.state.usersFiltrado}
+                            data={this.state.userFilter}
                             keyExtractor={item => item.id.toString()}
                             renderItem={({ item }) =>
                                 <Text style={style.text} onPress={() => this.props.navigation.navigate('Profile', { email: item.data.email })}>{item.data.userName} </Text>
