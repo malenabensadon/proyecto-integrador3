@@ -161,10 +161,11 @@ class MyProfile extends Component {
                     <TouchableOpacity onPress={() => this.editProfile()}>
                         <Text style={styles.textos3}>Editar</Text>
                     </TouchableOpacity>
-
                     <TouchableOpacity onPress={() => this.logout()} >
                     <Text style={styles.logout}>Log out</Text>
                 </TouchableOpacity>
+
+
                 </View>
                 
             </>
@@ -221,17 +222,7 @@ const styles = StyleSheet.create({
     foto: {
         flex: 1,
         minHeight: 150,
-    },
-    logout: {
-        color: 'rgb(0,0,0)',
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderColor: 'rgb(0,0,0)',
-        backgroundColor: 'rgb(255,255,255)',
-        padding: 10,
-        margin: 10
-
-    },
+    }
 })
 
 
