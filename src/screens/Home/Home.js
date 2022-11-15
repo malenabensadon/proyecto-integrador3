@@ -41,10 +41,6 @@ class Home extends Component {
       //      .then(() => this.props.navigation.navigate("Login"))
     //}
 
-    // irAComments() {
-    //     this.props.navigation.navigate("Comments", { id: this.state.postID })
-    // }
-
     render() {
         return (
             <>
@@ -59,7 +55,7 @@ class Home extends Component {
                 <FlatList style={styles.fondo}
                     data={this.state.posts}
                     keyExtractor={onePost => onePost.id.toString()}
-                    renderItem={({ item }) => <Post postData={item} irAComments={() => this.irAComments()} navigation= {this.props.navigation} />}
+                    renderItem={({ item }) => <Post postData={item} navigation= {this.props.navigation} />}
                 />
                 {/* <TouchableOpacity onPress={() => this.logout()} >
                     <Text style={styles.logout}>Log out</Text>

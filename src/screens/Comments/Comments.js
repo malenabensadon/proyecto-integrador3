@@ -8,97 +8,75 @@ class Comments extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            comments: {},
+            comments: [],
             text: '',
             cantComments: 0,
-            postID: '',
-            data: {},
-            username: []
-            // .data.comments.length
+            email: '',
+            userName: '',
         }
     };
 
     componentDidMount() {
-        db.collection('users').doc(auth.currentUser.email).onSnapshot(
+        this.getUserInfo();
+        this.getComments();
+    }
+
+    getComments() {
+        db.collection('posts').doc(this.props.route.params.postId).onSnapshot(
             doc => {
-                    this.state.username.push({
-                        id: doc.id, 
-                        data: doc.data(),
-                        username: doc.data().owner = auth.currentUser.email
-                        //email: auth.currentUser.email
-                        // email: doc.data().email,
-                        // username: doc.data().userName
-                    })
-                    this.setState({
-                        username: username
-                    })
-                }
-            
+                const postData = doc.data();
+                this.setState({
+                    comments: postData.comments,
+                })
+            }
         )
-        // db.collection('users').onSnapshot(
-        //     docs => {
-        //         let username = []
-        //         docs.forEach( doc => {
-        //             username.push({
-        //                 id: doc.id, 
-        //                 data: doc.data(),
-        //                 username: doc.data().owner = auth.currentUser.email
-        //                 //email: auth.currentUser.email
-        //                 // email: doc.data().email,
-        //                 // username: doc.data().userName
-        //             })
-        //             this.setState({
-        //                 username: username
-        //             })
-        //         })
-        //     }
-        // )
-            // .then(() => this.setState({
-            //     username:  //arreglar el estado como para que nos traiga la length del array
-            // }))
+    }
 
-        this.setState({
-            comments: this.props.route.params.data.data.comments,
-            postID: this.props.route.params.data.id
-            //comments: doc.data().comments
-        })
-
-
-
+    getUserInfo() {
+        db.collection('users').where('owner', '==', auth.currentUser.email).onSnapshot(
+            docs => {
+                docs.forEach(doc => {
+                    const user = doc.data();
+                    this.setState({
+                        email: user.owner,
+                        userName: user.userName,
+                    })
+                });
+            }
+        )
     }
 
     createComment(text) {
-
         db.collection('posts')
-            .doc(this.state.postID) //identificar bien el documento porque trae siempre el mismo
+            .doc(this.props.route.params.postId) //identificar bien el documento porque trae siempre el mismo
             .update({
                 comments: firebase.firestore.FieldValue.arrayUnion({
                     comment: text,
-                    username: auth.currentUser.email, //en realidad, mejor traer el username 
+                    owner: this.state.email,
+                    username: this.state.userName,
                     createdAt: Date.now()
                 })
             })
-            .then(() => this.setState({
-                cantComments: this.state.cantComments + 1 //arreglar el estado como para que nos traiga la length del array
+            .then(() => {
+                this.getComments();
+                this.setState({
+                    cantComments: this.state.cantComments + 1, //arreglar el estado como para que nos traiga la length del array
+                    text: '',
+                })
             })
-            )
             .catch(e => console.log(e))
     }
 
 
     render() {
-        console.log(this.props)
-        console.log(this.state.username)
-        // console.log(this.state.username)
-        //console.log(auth.currentUser)
-        //console.log(auth.currentUser.id)
         return (
             <View style={style.container}>
-
                 <FlatList
                     data={this.state.comments}
-                    keyExtractor={onePost => onePost.toString()}
-                    renderItem={({ item }) => <Text onPress={() => this.props.navigation.navigate('Profile')}>{item.username}: {item.comment}</Text>}
+                    keyExtractor={onePost => onePost.createdAt}
+                    renderItem={({ item }) => <Text onPress={() => this.props.navigation.navigate('Profile', {
+                        email: item.owner
+                    })}>{item.username}: {item.comment}</Text>}
                 />
 
                 <TextInput style={style.input}

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { auth, db } from '../../firebase/config';
+import { Text, TextInput, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { auth, db, storage } from '../../firebase/config';
 import MyCamera from '../../components/MyCamera/MyCamera';
-import { StyleSheet } from 'react-native-web';
 
 
 class NewPost extends Component {
@@ -13,6 +12,7 @@ class NewPost extends Component {
             createdAt: '',
             photo: '',
             showCamera: true,
+            imagePickerError: '',
         }
     }
 

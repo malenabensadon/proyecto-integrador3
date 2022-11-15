@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Camera } from 'expo-camera';
 import { storage } from '../../firebase/config';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 
 class MyCamera extends Component {
     constructor(props) {
@@ -35,8 +36,27 @@ class MyCamera extends Component {
             .catch(e => console.log(e))
     }
 
-    guardarFoto() {
-        fetch(this.state.urlTemporal)
+    pickImage = async () => {
+        let pickerResult = await ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [4, 3],
+        });
+        this.handleImagePicked(pickerResult);
+    };
+
+    handleImagePicked = async (pickerResult) => {
+        try {
+          if (!pickerResult.cancelled) {
+            this.guardarFoto(pickerResult.uri);
+          }
+        } catch (e) {
+          console.log(e);
+          alert("Upload failed, sorry :(");
+        }
+    };
+
+    guardarFoto(uploadUrl) {
+        fetch(uploadUrl)
             .then(res => res.blob())
             .then(imagen => {
                 const refStorage = storage.ref(`photos/${Date.now()}.jpg`);
@@ -44,6 +64,10 @@ class MyCamera extends Component {
                     .then(() => {
                         refStorage.getDownloadURL()
                             .then(url => this.props.onImageUpload(url))
+                        this.setState({
+                            urlTemporal: '',
+                            showCamera: false
+                        })
                     })
 
             })
@@ -73,6 +97,9 @@ class MyCamera extends Component {
                                 <TouchableOpacity style={styles.button} onPress={() => this.sacarFoto()}>
                                     <Text style={styles.texto}>Sacar foto</Text>
                                 </TouchableOpacity>
+                                <TouchableOpacity style={styles.button} onPress={this.pickImage}>
+                                    <Text style={styles.texto}>Subir Foto</Text>
+                                </TouchableOpacity>
                             </View>
                             :
                             <View>
@@ -84,7 +111,7 @@ class MyCamera extends Component {
                                 <TouchableOpacity style={styles.button} onPress={() => this.cancelar()}>
                                     <Text style={styles.texto}>Cancelar</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.button} onPress={() => this.guardarFoto()}>
+                                <TouchableOpacity style={styles.button} onPress={() => this.guardarFoto(this.state.urlTemporal)}>
                                     <Text style={styles.texto}>Aceptar</Text>
                                 </TouchableOpacity>
                             </View>

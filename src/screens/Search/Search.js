@@ -10,87 +10,66 @@ class Search extends Component {
         super(props)
         this.state = {
             users: [],
-            userFilter: [],
-            userText: '',
-            search: false
+            userText: ''
         }
     }
-    componentDidMount() {
+
+    buscar(searchValue) {
         db.collection('users').onSnapshot(
             docs => {
                 let user = [];
                 docs.forEach(doc => {
-                    user.push({
-                        id: doc.id,
-                        data: doc.data()
-                    })
-                    this.setState({
-                        users: user
-                    })
+                    const userInfo = doc.data();
+                    if (userInfo.userName.toLowerCase().startsWith(searchValue)) {
+                        user.push({
+                            id: doc.id,
+                            data: doc.data()
+                        })
+                    }
+                })
+                this.setState({
+                    userText: searchValue,
+                    users: user,
                 })
             }
         )
     }
 
-    evitarSubmit(event) {
+    onChange(event) {
         event.preventDefault()
-
-        this.setState({
-            userFilter: this.state.users.filter(users => users.data.userName.toLowerCase().includes(this.state.userText.toLowerCase())),
-            search: true,
-        })
-    }
-
-    changes(event) {
-        this.setState({
-            userText: event.target.value
-        })
+        this.buscar(event.target.value)
     }
 
     borrarBuscador() {
+        this.buscar('')
         this.setState({
-            userFilter: '',
             userText: ''
         })
     }
 
     render() {
-        console.log(this.state.users)
-        console.log(this.state.userFilter)
         return (
             <View style={style.container}>
                 <TextInput style={style.input}
                     placeholder='Search'
                     keyboardType='default'
-                    onChangeText={text => this.setState({ userText: text })}
+                    onChange={(event) => this.onChange(event)}
                     value={this.state.userText}
-                    onChange={(event) => this.changes(event)}
                 />
-
-                {
-                    this.state.userText == '' ?
-                        <Text style={style.msj}>Fill in the empty field</Text> :
-                        <View>
-                            <TouchableOpacity onPress={(event) => this.evitarSubmit(event)}>
-                                <Text style={style.boton}>SEARCH</Text>
-                            </TouchableOpacity>
-                        </View>
-                }
-                {this.state.userFilter.length == 0 && this.state.search == true ?
-                    <Text style={style.msj}>No results matching your search</Text> :
-                    <View>
-                        <FlatList
-                            data={this.state.userFilter}
-                            keyExtractor={item => item.id.toString()}
-                            renderItem={({ item }) =>
-                                <Text style={style.text} onPress={() => this.props.navigation.navigate('Profile', { email: item.data.email })}>{item.data.userName} </Text>
-                            }
-                        />
-
-                    </View>
-
-                }
-
+                { this.state.userText !== '' ? (
+                   <>
+                        {this.state.users.length === 0 ?
+                            <Text style={style.msj}>No results matching your search</Text> :
+                            <FlatList
+                                data={this.state.users}
+                                keyExtractor={item => item.id.toString()}
+                                renderItem={({ item }) =>
+                                    <Text style={style.text} onPress={() => this.props.navigation.navigate('Profile', { email: item.data.owner })}>{item.data.userName} </Text>
+                                }
+                            />
+                        }
+                   </>
+                ) : null}
             </View>
         )
     }
