@@ -111,19 +111,24 @@ class MyProfile extends Component {
      //   console.log(this.state.newPassword);
         return (
             <>
-                <View style={styles.container}>
-                    <View style={{ backgroundColor: "black" }}>
-                        <Text style={styles.titulo}></Text>
-                        <Text style={styles.textos}>{this.state.userName}</Text>
-                        <Text style={styles.textos2}>{this.state.email}</Text>
-                        <Text style={styles.textos2}>{this.state.bio}</Text>
-                    </View>
+ <View style={styles.container}>
+ <View style={styles.containerPic}>
                     <Image
                         style={styles.foto}
                         source={this.state.foto}
                         resizeMode='small'
                     />
-                    <Text style={styles.textos2}>Cantidad de posteos: {this.state.userPosts.length}</Text>
+               
+                    <View style={styles.containerText}>
+                        <Text style={styles.titulo}></Text>
+                        <Text style={styles.textos}>{this.state.userName}</Text>
+                        <Text style={styles.textos2}>{this.state.email}</Text>
+                        <Text style={styles.textos2}>Cantidad de posteos: {this.state.userPosts.length}</Text>
+                        <Text style={styles.textos4}>{this.state.bio}</Text>
+                    </View>
+                    </View>
+                   
+                   
                     <FlatList
                         data={this.state.userPosts}
                         keyExtractor={onePost => onePost.id.toString()}
@@ -183,9 +188,37 @@ const styles = StyleSheet.create({
         fontSize: 25,
         textAlign: 'center',
     },
+    logout:{
+        color: 'white',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'black',
+        padding: 10,
+        margin: 10
+    },
     container: {
         backgroundColor: 'black',
         flex: 1
+    },
+    containerPic: {
+        flex: 2,
+        flexDirection: 'row',
+        marginBottom: 15
+    },
+    containerText: {
+        margin: 15,
+        backgroundColor: 'black',
+        width: '70vw',
+        flexGrow: 1,
+        flex: 1
+    },
+    textos: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 8,
+        marginBottom: 15,
     },
     textos2: {
         color: 'white',
@@ -194,6 +227,7 @@ const styles = StyleSheet.create({
         fontSize: 10,
         textAlign: 'center',
         margin: 2,
+        marginTop: 10,
     },
     titulo: {
         color: 'white'
@@ -208,9 +242,9 @@ const styles = StyleSheet.create({
     textos4: {
         color: 'white',
         fontFamily: 'Oswald, sans-serif',
-        fontWeight: 'bold',
-        fontSize: 15,
+        fontSize: 10,
         textAlign: 'center',
+        marginTop: 10
     },
     input: {
         color: 'white',
@@ -221,7 +255,16 @@ const styles = StyleSheet.create({
     },
     foto: {
         flex: 1,
-        minHeight: 150,
+       // minHeight: 150,
+        height: 160,
+        width: 20,
+      borderRadius: 1000,
+      margin: 10, 
+      marginLeft: 20,
+      marginRight: 0,
+      marginTop: 10,
+      marginBottom: 30,
+
     }
 })
 

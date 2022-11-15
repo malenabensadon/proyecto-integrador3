@@ -78,7 +78,7 @@ class Login extends Component {
                         value={this.state.pass}
                     />
                     {this.state.errors.field === 'password' && (
-                        <Text> {this.state.errors.message} </Text>
+                        <Text style={style.error}> {this.state.errors.message} </Text>
                     )}
                     <TouchableOpacity onPress={() => this.loginUser(
                         this.state.email,
@@ -131,6 +131,10 @@ const style = StyleSheet.create({
         margin: 10,
         padding: 10,
         textAlign: 'right'
+    },
+    error:{
+        color: 'red'
+    
     },
     btnLoginTxt: {
         color: 'black'

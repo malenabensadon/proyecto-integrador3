@@ -106,23 +106,30 @@ class Profile extends Component {
         return (
             <>
                 <View style={styles.container}>
-                    <View style={{ backgroundColor: "black" }}>
+
+                <View style={styles.containerPic}>
+                     <Image
+                        style={styles.foto}
+                        source={this.state.foto}
+                        resizeMode='cover'/>
+                    </View>
+
+                    <View style={styles.containerText}>
                         <Text style={styles.titulo}></Text>
                         <Text style={styles.textos}>{this.state.userName}</Text>
                         <Text style={styles.textos2}>{this.state.email}</Text>
                         <Text style={styles.textos2}>{this.state.bio}</Text>
                     </View>
-                    <Image
-                        style={styles.foto}
-                        source={this.state.foto}
-                        resizeMode='cover'
-                    />
+                    
                     <Text style={styles.textos2}>Cantidad de posteos: {this.state.userPosts.length}</Text>
                     <FlatList
                         data={this.state.userPosts}
                         keyExtractor={onePost => onePost.id.toString()}
                         renderItem={({ item }) => <Post postData={item} irAComments={() => { }} refrescarPosts={this.getUserPosts} />}
                     />
+                     <TouchableOpacity onPress={() => this.logout()} >
+                    <Text style={styles.logout}>Log out</Text>
+                </TouchableOpacity>
                 </View>
             </>
         )
@@ -138,9 +145,21 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 25,
         textAlign: 'center',
+        
     },
     container: {
         backgroundColor: 'black',
+        flex: 1,
+        padding: 15,
+    },
+    containerPic: {
+        flex: 2,
+        flexDirection: 'row'
+    },
+    containerText: {
+        margin: 15,
+        width: '70vw',
+        flexGrow: 1,
         flex: 1
     },
     textos2: {
@@ -176,8 +195,12 @@ const styles = StyleSheet.create({
         margin: 4
     },
     foto: {
-        flex: 1,
-        minHeight: 150,
+       // flex: 1,
+       // minHeight: 150,
+        borderRadius: 90,
+        width: 10,
+        height: 10,
+
     }
 })
 
