@@ -8,17 +8,55 @@ class Comments extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            comments: [],
+            comments: {},
             text: '',
             cantComments: 0,
             postID: '',
             data: {},
-            // username: ''
+            username: []
             // .data.comments.length
         }
     };
 
     componentDidMount() {
+        db.collection('users').doc(auth.currentUser.email).onSnapshot(
+            doc => {
+                    this.state.username.push({
+                        id: doc.id, 
+                        data: doc.data(),
+                        username: doc.data().owner = auth.currentUser.email
+                        //email: auth.currentUser.email
+                        // email: doc.data().email,
+                        // username: doc.data().userName
+                    })
+                    this.setState({
+                        username: username
+                    })
+                }
+            
+        )
+        // db.collection('users').onSnapshot(
+        //     docs => {
+        //         let username = []
+        //         docs.forEach( doc => {
+        //             username.push({
+        //                 id: doc.id, 
+        //                 data: doc.data(),
+        //                 username: doc.data().owner = auth.currentUser.email
+        //                 //email: auth.currentUser.email
+        //                 // email: doc.data().email,
+        //                 // username: doc.data().userName
+        //             })
+        //             this.setState({
+        //                 username: username
+        //             })
+        //         })
+        //     }
+        // )
+            // .then(() => this.setState({
+            //     username:  //arreglar el estado como para que nos traiga la length del array
+            // }))
+
         this.setState({
             comments: this.props.route.params.data.data.comments,
             postID: this.props.route.params.data.id
@@ -30,12 +68,6 @@ class Comments extends Component {
     }
 
     createComment(text) {
-        // db.collection('users')
-        //     .doc(auth.currentUser.id)
-        //     .then(() => this.setState({
-        //         username: auth.currentUser.userName //arreglar el estado como para que nos traiga la length del array
-        //     }))
-
 
         db.collection('posts')
             .doc(this.state.postID) //identificar bien el documento porque trae siempre el mismo
@@ -56,9 +88,10 @@ class Comments extends Component {
 
     render() {
         console.log(this.props)
-        console.log(this.state)
         console.log(this.state.username)
-        console.log(auth.currentUser)
+        // console.log(this.state.username)
+        //console.log(auth.currentUser)
+        //console.log(auth.currentUser.id)
         return (
             <View style={style.container}>
 
