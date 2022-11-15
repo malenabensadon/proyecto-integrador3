@@ -3,12 +3,13 @@ import { AntDesign } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Comments from '../../screens/Comments/Comments';
+import { FontAwesome } from '@expo/vector-icons';
 
 import Home from '../../screens/Home/Home';
 import MyProfile from '../../screens/MyProfile/MyProfile';
 import NewPost from '../../screens/NewPost/NewPost';
 import Profile from '../../screens/Profile/Profile';
-import Navbar from '../Navbar/Navbar';
+//import Search from '../../screens/Search/Search';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -27,9 +28,9 @@ function HomeMenu() {
             <Tab.Screen name="MyProfile" component={MyProfile} options={
                 { tabBarIcon: () => <AntDesign name="user" size={24} color="black" /> }
             } />
-             <Tab.Screen name="Navbar" component={Navbar} options={
-                { tabBarIcon: () => <AntDesign name="user" size={24} color="black" /> }
-            } />
+            {/* <Tab.Screen name="Search" component={ Search }  options={
+                {tabBarIcon: ()=> <FontAwesome name="search" size={24} color="black" />} 
+            } /> */}
         </Tab.Navigator>
     )
 }

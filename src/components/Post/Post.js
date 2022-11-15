@@ -82,8 +82,7 @@ class Post extends Component {
                 />
 
                 <TouchableOpacity style={styles.first} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
-                    <Text style={styles.first}>{this.props.postData.data.userName} </Text> 
-                </TouchableOpacity>
+                <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text>                </TouchableOpacity>
                 {this.state.miLike ?
                     <TouchableOpacity style={styles.like} onPress={() => this.unlike()}>
                         <FontAwesome name='heart' color='#E4127E' size={20} />
@@ -93,7 +92,7 @@ class Post extends Component {
                         <FontAwesome name='heart-o' color='#E4127E' size={20} />
                     </TouchableOpacity>
                 }
-                <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text>
+                {/* <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text> */}
                 {/* <Text style={styles.second}>{this.props.postData.data.textoPost}</Text> */}
                 <Text style={styles.third}>Likes: {this.state.cantidadDeLikes}</Text>
 
@@ -122,7 +121,8 @@ const styles = StyleSheet.create({
 
     like: {
         marginLeft: 15,
-        marginBottom: 4
+        marginBottom: 4,
+        marginTop: 4,
     },
 
     fondo: {
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         fontWeight: 600,
-        marginLeft: 15
+        marginLeft: 8
 
     },
     second: {
