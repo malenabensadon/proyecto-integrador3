@@ -36,10 +36,10 @@ class Home extends Component {
         )
     }
 
-    logout() {
-        auth.signOut()
-            .then(() => this.props.navigation.navigate("Login"))
-    }
+   // logout() {
+    //    auth.signOut()
+      //      .then(() => this.props.navigation.navigate("Login"))
+    //}
 
     // irAComments() {
     //     this.props.navigation.navigate("Comments", { id: this.state.postID })
@@ -61,9 +61,9 @@ class Home extends Component {
                     keyExtractor={onePost => onePost.id.toString()}
                     renderItem={({ item }) => <Post postData={item} irAComments={() => this.irAComments()} navigation= {this.props.navigation} />}
                 />
-                <TouchableOpacity onPress={() => this.logout()} >
+                {/* <TouchableOpacity onPress={() => this.logout()} >
                     <Text style={styles.logout}>Log out</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </>
 
         )
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'black'
 
     },
-    logout: {
+  /*   logout: {
         color: 'rgb(0,0,0)',
         borderStyle: 'solid',
         borderWidth: 1,
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10
 
-    },
+    }, */
     titulos: {
         color: 'white',
         backgroundColor: 'black',

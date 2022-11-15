@@ -67,7 +67,10 @@ class MyProfile extends Component {
             }
         )
     }
-
+    logout() {
+        auth.signOut()
+            .then(() => this.props.navigation.navigate("Login"))
+    }
     updateProfileInfo() {
         db.collection('users')
             .doc(this.state.userId) //identificar el documento
@@ -105,7 +108,7 @@ class MyProfile extends Component {
 
 
     render() {
-        console.log(this.state.newPassword);
+     //   console.log(this.state.newPassword);
         return (
             <>
                 <View style={styles.container}>
@@ -118,7 +121,7 @@ class MyProfile extends Component {
                     <Image
                         style={styles.foto}
                         source={this.state.foto}
-                        resizeMode='cover'
+                        resizeMode='small'
                     />
                     <Text style={styles.textos2}>Cantidad de posteos: {this.state.userPosts.length}</Text>
                     <FlatList
@@ -159,7 +162,11 @@ class MyProfile extends Component {
                         <Text style={styles.textos3}>Editar</Text>
                     </TouchableOpacity>
 
+                    <TouchableOpacity onPress={() => this.logout()} >
+                    <Text style={styles.logout}>Log out</Text>
+                </TouchableOpacity>
                 </View>
+                
             </>
         )
 
@@ -214,7 +221,17 @@ const styles = StyleSheet.create({
     foto: {
         flex: 1,
         minHeight: 150,
-    }
+    },
+    logout: {
+        color: 'rgb(0,0,0)',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'rgb(0,0,0)',
+        backgroundColor: 'rgb(255,255,255)',
+        padding: 10,
+        margin: 10
+
+    },
 })
 
 

@@ -99,22 +99,22 @@ class Search extends Component {
 const style = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         color: 'rgb(255,255,255)',
         padding: 15,
         justifyContent: 'center',
     },
     text: {
+        color: 'white',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'white',
+    },
+    input: {
         color: 'black',
         borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: 'rgb(0,0,0)',
-    },
-    input: {
-        color: 'rgb(0,0,0)',
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderColor: 'rgb(0,0,0)',
+        borderColor: 'white',
         backgroundColor: 'rgb(255,255,255)',
         padding: 10,
         margin: 10
@@ -123,11 +123,11 @@ const style = StyleSheet.create({
         borderStyle: 'solid',
         borderWidth: 1,
         borderColor: 'rgb(180, 37, 130)',
-        backgroundColor: 'rgb(0,0,0)',
+        backgroundColor: 'white',
         margin: 10,
         padding: 10,
         textAlign: 'center',
-        color: 'white'
+        color: 'black'
     },
     msj: {
         color: 'red'

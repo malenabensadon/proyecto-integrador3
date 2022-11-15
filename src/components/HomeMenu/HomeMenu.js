@@ -19,18 +19,19 @@ function HomeMenu() {
         <Tab.Navigator screenOptions={{ tabBarShowLabel: false }}>
             <Tab.Screen name="HomeStack" component={HomeStack} options={
                 {
-                    tabBarIcon: () => <AntDesign name="home" size={24} color="black" />
+                    tabBarIcon: () => <AntDesign name="home" size={24} color="black" />, headerShown: false
                 }
             } />
             <Tab.Screen name="NewPost" component={NewPost} options={
-                { tabBarIcon: () => <AntDesign name="pluscircleo" size={24} color="black" /> }
-            } />
-            <Tab.Screen name="MyProfile" component={MyProfile} options={
-                { tabBarIcon: () => <AntDesign name="user" size={24} color="black" /> }
+                { tabBarIcon: () => <AntDesign name="pluscircleo" size={24} color="black" />, headerShown: false }
             } />
             {<Tab.Screen name="Search" component={ Search }  options={
-                {tabBarIcon: ()=> <FontAwesome name="search" size={24} color="black" />} 
+                {tabBarIcon: ()=> <FontAwesome name="search" size={24} color="black" />, headerShown: false} 
             } /> }
+            <Tab.Screen name="MyProfile" component={MyProfile} options={
+                { tabBarIcon: () => <AntDesign name="user" size={24} color="black" />, headerShown: false }
+            } />
+            
         </Tab.Navigator>
     )
 }
