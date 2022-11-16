@@ -137,7 +137,7 @@ class Register extends Component {
                             this.state.email === '' || this.state.pass === ''
                         }
                     >
-                        <Text style={style.text}>Registrarme</Text>
+                        <Text style={style.btnLogin}>Registrarme</Text>
                     </TouchableOpacity>
                     <Text onPress={() => this.props.navigation.navigate('Login')} style={style.btnLoginTxt}>Iniciar Sesion</Text>
                 </View>
@@ -163,11 +163,13 @@ const style = StyleSheet.create({
     btnLogin: {
         borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: 'rgb(213, 42, 153)',
+        borderColor: 'black',
         backgroundColor: 'rgb(0,0,0)',
         margin: 10,
+        color: 'white',
         padding: 10,
-        textAlign: 'right'
+        textAlign: 'center',
+        borderRadius: 8
     },
     btnLoginTxt: {
         color: 'black'
@@ -182,7 +184,10 @@ const style = StyleSheet.create({
         margin: 10
     },
     camera: {
-        color: 'black'
+        color: 'black',
+        fontWeight: 'bold',
+        textAlign: 'center',
+
     }
 });
 

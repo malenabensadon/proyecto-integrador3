@@ -95,9 +95,9 @@ class Login extends Component {
                             this.state.email === '' || this.state.pass === ''
                         }
                     >
-                        <Text style={style.text}>Ingresar</Text>
+                        <Text style={style.btnLogin}>Ingresar</Text>
                     </TouchableOpacity>
-                    <Text onPress={() => this.props.navigation.navigate('Register')} style={style.btnLoginTxt}>Ir a Registro</Text>
+                    <Text onPress={() => this.props.navigation.navigate('Register')} style={style.registro}>No tenes cuenta? Registrate acá</Text>
                 </View>
             </View>
         )
@@ -126,11 +126,16 @@ const style = StyleSheet.create({
     btnLogin: {
         borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: 'rgb(180, 37, 130)',
+        borderColor: 'black',
         backgroundColor: 'rgb(0,0,0)',
         margin: 10,
+        color: 'white',
         padding: 10,
-        textAlign: 'right'
+        textAlign: 'center',
+        borderRadius: 8
+    },
+    registro:{
+
     },
     error:{
         color: 'red'

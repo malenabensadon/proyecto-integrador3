@@ -20,7 +20,7 @@ class MyProfile extends Component {
             userName: '',
             currentPassword: '',
             newPassword: '',
-            foto:'',
+            foto: '',
             bio: '',
             userId: '',
             editSucces: false,
@@ -85,20 +85,20 @@ class MyProfile extends Component {
     }
 
     editProfile() {
-        if(this.state.newPassword !== '') {
+        if (this.state.newPassword !== '') {
             auth.signInWithEmailAndPassword(auth.currentUser.email, this.state.currentPassword)
-            .then(res => {
-                const user = auth.currentUser;
-    
-                user.updatePassword(this.state.newPassword)
                 .then(res => {
-                    this.updateProfileInfo();
+                    const user = auth.currentUser;
+
+                    user.updatePassword(this.state.newPassword)
+                        .then(res => {
+                            this.updateProfileInfo();
+                        })
+                        .catch(err => console.log(err))
                 })
-                .catch(err => console.log(err))
-            })
-            .catch(err => this.setState({
-                err: err.message
-            }))
+                .catch(err => this.setState({
+                    err: err.message
+                }))
 
         } else {
             this.updateProfileInfo();
@@ -108,71 +108,71 @@ class MyProfile extends Component {
 
 
     render() {
-     //   console.log(this.state.newPassword);
+        //   console.log(this.state.newPassword);
         return (
             <>
- <View style={styles.container}>
- <View style={styles.containerPic}>
-                    <Image
-                        style={styles.foto}
-                        source={this.state.foto}
-                        resizeMode='small'
-                    />
-               
-                    <View style={styles.containerText}>
-                        <Text style={styles.titulo}></Text>
-                        <Text style={styles.textos}>{this.state.userName}</Text>
-                        <Text style={styles.textos2}>{this.state.email}</Text>
-                        <Text style={styles.textos2}>Cantidad de posteos: {this.state.userPosts.length}</Text>
-                        <Text style={styles.textos4}>{this.state.bio}</Text>
+                <View >
+                    <View >
+                        <Image
+
+                            source={this.state.foto}
+                            resizeMode='small'
+                        />
+
+                        <View >
+
+                            <Text >{this.state.userName}</Text>
+                            <Text >{this.state.email}</Text>
+                            <Text >Cantidad de posteos: {this.state.userPosts.length}</Text>
+                            <Text>{this.state.bio}</Text>
+                        </View>
                     </View>
-                    </View>
-                   
-                   
+
+
                     <FlatList
                         data={this.state.userPosts}
                         keyExtractor={onePost => onePost.id.toString()}
                         renderItem={({ item }) => <Post postData={item} irAComments={() => { }} refrescarPosts={this.getUserPosts} />}
                     />
 
-                    <Text style={styles.textos4}>Ingresa lo datos que quieras editar</Text>
-                    <TextInput style={styles.input}
+                    <Text >Ingresa lo datos que quieras editar</Text>
+                    <TextInput
                         placeholder='Ingresa tu nuevo nombre de usuario'
                         keyboardType='default'
                         onChangeText={text => this.setState({ userName: text })}
                         value={this.state.userName}
                     />
-                    <TextInput style={styles.input}
+                    <TextInput
                         placeholder='Ingresa tu nueva biografia'
                         keyboardType='default'
                         onChangeText={text => this.setState({ bio: text })}
                         value={this.state.bio}
                     />
-                    <TextInput style={styles.input}
+                    <TextInput
                         placeholder='Ingresa tu actual contraseña'
                         keyboardType='default'
                         secureTextEntry
                         onChangeText={text => this.setState({ currentPassword: text })}
                         value={this.state.currentPassword}
                     />
-                    <TextInput style={styles.input}
+                    <TextInput
                         placeholder='Ingresa tu nueva contraseña'
                         keyboardType='default'
                         secureTextEntry
                         onChangeText={text => this.setState({ newPassword: text })}
                         value={this.state.newPassword}
                     />
-                    <Text style={styles.textos}>{this.state.err}</Text>
+                    <Text >{this.state.err}</Text>
                     <TouchableOpacity onPress={() => this.editProfile()}>
-                        <Text style={styles.textos3}>Editar</Text>
+                        <Text >Editar</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this.logout()} >
-                    <Text style={styles.logout}>Log out</Text>
-                </TouchableOpacity>
+                        <Text >Log out</Text>
+                    </TouchableOpacity>
 
 
                 </View>
-                
+
             </>
         )
 
@@ -187,84 +187,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 25,
         textAlign: 'center',
-    },
-    logout:{
-        color: 'white',
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderColor: 'black',
-        padding: 10,
-        margin: 10
-    },
-    container: {
-        backgroundColor: 'black',
-        flex: 1
-    },
-    containerPic: {
-        flex: 2,
-        flexDirection: 'row',
-        marginBottom: 15
-    },
-    containerText: {
-        margin: 15,
-        backgroundColor: 'black',
-        width: '70vw',
-        flexGrow: 1,
-        flex: 1
-    },
-    textos: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 8,
-        marginBottom: 15,
-    },
-    textos2: {
-        color: 'white',
-        fontFamily: 'Oswald, sans-serif',
-        fontWeight: 'bold',
-        fontSize: 10,
-        textAlign: 'center',
-        margin: 2,
-        marginTop: 10,
-    },
-    titulo: {
-        color: 'white'
-    },
-    textos3: {
-        color: 'white',
-        fontFamily: 'Oswald, sans-serif',
-        fontWeight: 'bold',
-        fontSize: 20,
-        textAlign: 'center',
-    },
-    textos4: {
-        color: 'white',
-        fontFamily: 'Oswald, sans-serif',
-        fontSize: 10,
-        textAlign: 'center',
-        marginTop: 10
-    },
-    input: {
-        color: 'white',
-        fontFamily: 'Oswald, sans-serif',
-        fontSize: 10,
-        textAlign: 'center',
-        margin: 4
-    },
-    foto: {
-        flex: 1,
-       // minHeight: 150,
-        height: 160,
-        width: 20,
-      borderRadius: 1000,
-      margin: 10, 
-      marginLeft: 20,
-      marginRight: 0,
-      marginTop: 10,
-      marginBottom: 30,
-
     }
 })
 
