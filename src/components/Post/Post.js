@@ -75,14 +75,22 @@ class Post extends Component {
     render() {
         return (
             <View style={styles.fondo}>
+              {/*   <TouchableOpacity style={styles.first} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
+                 <Image
+                    style={styles.photo}
+                    source={{ uri: this.props.postData.data.foto }}
+                    resizeMode='cover'
+                />  // imagen de perfil  
+                      <Text style={styles.username}>{this.props.postData.data.userName}</Text>  
+                </TouchableOpacity> */}
                 <Image
                     style={styles.photo}
                     source={{ uri: this.props.postData.data.photo }}
                     resizeMode='cover'
                 />
-
                 <TouchableOpacity style={styles.first} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
-                <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text>                </TouchableOpacity>
+                    <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text>
+                </TouchableOpacity>
                 {this.state.miLike ?
                     <TouchableOpacity style={styles.like} onPress={() => this.unlike()}>
                         <FontAwesome name='heart' color='#E4127E' size={20} />
@@ -92,11 +100,16 @@ class Post extends Component {
                         <FontAwesome name='heart-o' color='#E4127E' size={20} />
                     </TouchableOpacity>
                 }
-                {/* <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text> */}
-                {/* <Text style={styles.second}>{this.props.postData.data.textoPost}</Text> */}
-                <Text style={styles.third}>Likes: {this.state.cantidadDeLikes}</Text>
-
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments', {data: this.props.postData}) }>
+                {/* <Text style={styles.third}> {this.state.cantidadDeLikes}</Text>  */}
+                {/* <TouchableOpacity style={styles.first} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
+                    <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text>
+                </TouchableOpacity> */}
+                
+               
+                 <Text style={styles.third}>Likes: {this.state.cantidadDeLikes}</Text> 
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments', {
+                    postId: this.props.postData.id
+                })}>
                     <Text style={styles.fourth}>{this.props.postData.data.comments.length} Comments...</Text>
                 </TouchableOpacity>
                 {this.state.isMyPost ? (
@@ -141,7 +154,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         fontWeight: 600,
-        marginLeft: 8
+        marginLeft: 8,
+        paddingBottom: 3
 
     },
     second: {
@@ -156,15 +170,21 @@ const styles = StyleSheet.create({
         color: 'white',
         alignContent: 'center',
         marginLeft: 15,
+        paddingBottom: 10,
     },
     fourth: {
-        color: 'white',
+        color: 'lightgrey',
         alignContent: 'center',
         marginLeft: 15,
     },
     trash: {
         marginTop: 3,
         marginLeft: 15,
+    },
+    username: {
+        fontSize: 17,
+        color: 'white',
+        fontWeight: 600
     }
 
 
