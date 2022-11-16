@@ -68,7 +68,7 @@ class Home extends Component {
 }
 const styles = StyleSheet.create({
     fondo: {
-        backgroundColor: 'black'
+        backgroundColor: 'white'
 
     },
   /*   logout: {

@@ -9,7 +9,7 @@ function Navbar() {
             <nav className="headerDesktop" style={styles.nav}>
                 <div className="logoBeFoodie">
                     <Image style={styles.logo}
-                        source={require("../../../assets/LOGONUEVOO.png")}
+                        source={require("../../../assets/logoblanconew.png")}
                         resizeMode='contain' />
                 </div>
 
@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
         height: 85,
     },
     nav: {
-        backgroundColor: 'rgb(0,0,0)'
+        backgroundColor: 'white',
+        
     }
 
 })

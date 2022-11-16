@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     },
 
     fondo: {
-        backgroundColor: 'rgb(48, 46, 47)',
+        backgroundColor: 'rgb(246, 246, 246)',
         borderRadius: 10,
         flex: 1,
         justifyContent: 'center',
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
 
     },
     first: {
-        color: 'white',
+        color: 'rgb(59, 59, 59)',
         // textAlign: 'center',
         flex: 1,
         flexDirection: 'row',
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
 
     },
     second: {
-        color: 'white',
+        color: 'rgb(59, 59, 59)',
         alignContent: 'center',
         marginLeft: 15,
         flex: 2,
@@ -175,15 +175,17 @@ const styles = StyleSheet.create({
 
     },
     third: {
-        color: 'white',
+        color: 'rgb(59, 59, 59)',
         alignContent: 'center',
         marginLeft: 3,
+        marginTop: 1,
        // paddingBottom: 10,
     },
     fourth: {
-        color: 'lightgrey',
+        color: 'rgb(59, 59, 59)',
         alignContent: 'center',
         marginLeft: 15,
+        marginBottom: 4,
     },
     trash: {
         marginTop: 3,
@@ -191,7 +193,7 @@ const styles = StyleSheet.create({
     },
     username: {
         fontSize: 17,
-        color: 'white',
+        color: 'rgb(59, 59, 59)',
         fontWeight: 600
     }
 

@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { db, auth } from "../../firebase/config"
 import firebase from 'firebase'
 import { WhiteBalance } from 'expo-camera'
+import { EvilIcons } from '@expo/vector-icons'; 
 
 
 class Search extends Component {
@@ -51,6 +52,7 @@ class Search extends Component {
         return (
             <View style={style.container}>
                 <TextInput style={style.input}
+                
                     placeholder='Search'
                     keyboardType='default'
                     onChange={(event) => this.onChange(event)}
@@ -78,22 +80,25 @@ class Search extends Component {
 const style = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         color: 'rgb(255,255,255)',
         padding: 15,
         justifyContent: 'center',
     },
     text: {
-        color: 'white',
+        color: 'rgb(84, 84, 84)',
+        padding: 10,
+        fontWeight: 'bold',
         borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: 'white',
+        borderColor: 'rgb(216, 216, 216)',
     },
     input: {
         color: 'black',
         borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: 'white',
+        borderColor: 'black',
+        borderRadius: 8,
         backgroundColor: 'rgb(255,255,255)',
         padding: 10,
         margin: 10
@@ -102,11 +107,11 @@ const style = StyleSheet.create({
         borderStyle: 'solid',
         borderWidth: 1,
         borderColor: 'rgb(180, 37, 130)',
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         margin: 10,
         padding: 10,
         textAlign: 'center',
-        color: 'black'
+        color: 'white'
     },
     msj: {
         color: 'red'

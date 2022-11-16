@@ -54,7 +54,7 @@ class NewPost extends Component {
             <View style={style.container}>
                 {
                     this.state.showCamera ?
-                        <MyCamera onImageUpload={url => this.onImageUpload(url)} />
+                        <MyCamera style={style.camara} onImageUpload={url => this.onImageUpload(url)} />
                         :
                         <View style={style.container}>
                             <Text style={style.title}>New Post</Text>
@@ -67,7 +67,7 @@ class NewPost extends Component {
                                     value={this.state.textoPost}
                                 />
                                 <TouchableOpacity style={style.mostrarCamara} onPress={() => this.createPost(this.state.textoPost, this.state.photo)}>
-                                    <Text style={style.textBtn}>Guardar</Text>
+                                    <Text style={style.textBtn}>GUARDAR</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -79,13 +79,17 @@ class NewPost extends Component {
 const style = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'rgb(0,0,0)',
+        backgroundColor: 'white',
         color: 'rgb(255,255,255)',
         padding: 15,
         justifyContent: 'center'
     },
+   
     description: {
         backgroundColor: 'white',
+        borderWidth: 1,
+        borderColor: 'black',
+        borderRadius: 8,
         padding: 20,
         fontSize: 16,
         marginVertical: 15
@@ -110,10 +114,14 @@ const style = StyleSheet.create({
     },
     mostrarCamara: {
         backgroundColor: 'rgb(213, 42, 153)',
+        borderWidth: 1,
+        padding: 10,
+        borderRadius:8,
         marginBottom: 15,
     },
     mostrarCamaraTxt: {
-        color: 'white'
+        color: 'white',
+        fontWeight: 'bold'
     },
     image: {
         width: 400,

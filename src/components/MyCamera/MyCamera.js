@@ -86,21 +86,22 @@ class MyCamera extends Component {
 
     render() {
         return (
+            <View style={styles.fondo}>
             <View>
                 {
                     this.state.permissions ?
                         this.state.showCamera ?
                             <View style={styles.cameraBody}>
                                 <Camera
-                                    style={styles.cameraBody}
+                                    style={styles.camera}
                                     type={Camera.Constants.Type.front}
                                     ref={metodosDeCamara => this.metodosDeCamara = metodosDeCamara}
                                 />
                                 <TouchableOpacity style={styles.button} onPress={() => this.sacarFoto()}>
-                                    <Text style={styles.texto}><Ionicons name="radio-button-on" size={90} color="white" /></Text>
+                                    <Text style={styles.texto5}><Ionicons name="radio-button-on" size={90} color="rgb(217, 217, 217)" /></Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.subir} onPress={this.pickImage}>
-                                    <Text style={styles.subir}> <AntDesign name="upload" size={20} color="white" />  Subir Foto</Text>
+                                    <Text style={styles.subir}> <AntDesign name="upload" size={25} color="rgb(217, 217, 217)" />  O subir foto de la galería</Text>
                                 </TouchableOpacity>
                             </View>
                             :
@@ -126,22 +127,31 @@ class MyCamera extends Component {
                         <Text>No tengo permisos</Text>
                 }
             </View>
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    fondo:{
+        backgrounColor: 'white',
+    },
     cameraBody: {
-        height: '80vh',
+        height: '60vh',
+        backgroundColor: 'white',
+        borderRadius: 8
     },
     preview: {
         height: '40vh'
     },
+    camera:{
+        borderRadius: 8
+    },
     subir:{
-        color: 'white',
+        color: 'rgb(217, 217, 217)',
         textAlign: 'center',
         fontWeight: 600,
-        fontSize: 30
+        fontSize: 20
     },
     botones:{
         flexDirection: 'row',
@@ -155,18 +165,22 @@ const styles = StyleSheet.create({
         marginTop: 0,
         borderWidth: 2,
     },
+    texto5:{
+        textAlign: 'center',
+    },
     aceptar:{
         fontWeight: 600,
-        color: 'white',
+        color: 'rgb(217, 217, 217)',
         fontSize: 24,
         textAlign: 'center',
         marginTop: 10,
         borderWidth: 2,
-        borderColor: 'white',
+        borderColor: 'rgb(217, 217, 217)',
         padding: 10,
         borderRadius: 8,
         
-    }
+    },
+   
 })
 
 export default MyCamera;
