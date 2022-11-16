@@ -3,6 +3,8 @@ import { Camera } from 'expo-camera';
 import { storage } from '../../firebase/config';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { AntDesign } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
 
 class MyCamera extends Component {
     constructor(props) {
@@ -95,10 +97,10 @@ class MyCamera extends Component {
                                     ref={metodosDeCamara => this.metodosDeCamara = metodosDeCamara}
                                 />
                                 <TouchableOpacity style={styles.button} onPress={() => this.sacarFoto()}>
-                                    <Text style={styles.texto}>Sacar foto</Text>
+                                    <Text style={styles.texto}><Ionicons name="radio-button-on" size={90} color="white" /></Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.button} onPress={this.pickImage}>
-                                    <Text style={styles.texto}>Subir Foto</Text>
+                                <TouchableOpacity style={styles.subir} onPress={this.pickImage}>
+                                    <Text style={styles.subir}> <AntDesign name="upload" size={20} color="white" />  Subir Foto</Text>
                                 </TouchableOpacity>
                             </View>
                             :
@@ -108,13 +110,16 @@ class MyCamera extends Component {
                                     source={{ uri: this.state.urlTemporal }}
                                     resizeMode='cover'
                                 />
+                                 <View style={styles.botones}>
                                 <TouchableOpacity style={styles.button} onPress={() => this.cancelar()}>
                                     <Text style={styles.texto}>Cancelar</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.button} onPress={() => this.guardarFoto(this.state.urlTemporal)}>
+                                <TouchableOpacity style={styles.texto} onPress={() => this.guardarFoto(this.state.urlTemporal)}>
                                     <Text style={styles.texto}>Aceptar</Text>
                                 </TouchableOpacity>
                             </View>
+                            </View>
+
 
                         :
                         <Text>No tengo permisos</Text>
@@ -128,22 +133,29 @@ const styles = StyleSheet.create({
     cameraBody: {
         height: '80vh',
     },
-    button: {
-        height: '20vh',
-        borderColor: '#ccc',
-        borderWidth: 1,
-        padding: 5,
-        borderRadius: 4,
-        marginTop: 20
-    },
     preview: {
         height: '40vh'
+    },
+    subir:{
+        color: 'white',
+        textAlign: 'center',
+        fontWeight: 600,
+        fontSize: 30
+
+
+    },
+    botones:{
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     texto: {
         fontWeight: 600,
         color: 'white',
         fontSize: 24,
-        textAlign: 'center'
+        textAlign: 'center',
+        marginTop: 0,
+        borderWidth: 2,
+
 
     }
 })
