@@ -111,12 +111,13 @@ class MyCamera extends Component {
                                     resizeMode='cover'
                                 />
                                  <View style={styles.botones}>
-                                <TouchableOpacity style={styles.button} onPress={() => this.cancelar()}>
-                                    <Text style={styles.texto}>Cancelar</Text>
+                                 <TouchableOpacity style={styles.aceptar1} onPress={() => this.guardarFoto(this.state.urlTemporal)}>
+                                    <Text style={styles.aceptar}>Aceptar</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.texto} onPress={() => this.guardarFoto(this.state.urlTemporal)}>
-                                    <Text style={styles.texto}>Aceptar</Text>
+                                <TouchableOpacity style={styles.aceptar1} onPress={() => this.cancelar()}>
+                                    <Text style={styles.aceptar}>Cancelar</Text>
                                 </TouchableOpacity>
+                                
                             </View>
                             </View>
 
@@ -141,12 +142,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 600,
         fontSize: 30
-
-
     },
     botones:{
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-around'
     },
     texto: {
         fontWeight: 600,
@@ -155,8 +154,18 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 0,
         borderWidth: 2,
-
-
+    },
+    aceptar:{
+        fontWeight: 600,
+        color: 'white',
+        fontSize: 24,
+        textAlign: 'center',
+        marginTop: 10,
+        borderWidth: 2,
+        borderColor: 'white',
+        padding: 10,
+        borderRadius: 8,
+        
     }
 })
 

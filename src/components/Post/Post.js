@@ -91,6 +91,8 @@ class Post extends Component {
                 <TouchableOpacity style={styles.first} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
                     <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text>
                 </TouchableOpacity>
+               
+                <View style={styles.mg}>
                 {this.state.miLike ?
                     <TouchableOpacity style={styles.like} onPress={() => this.unlike()}>
                         <FontAwesome name='heart' color='#E4127E' size={20} />
@@ -106,7 +108,9 @@ class Post extends Component {
                 </TouchableOpacity> */}
                 
                
-                 <Text style={styles.third}>Likes: {this.state.cantidadDeLikes}</Text> 
+                 <Text style={styles.third}>{this.state.cantidadDeLikes}</Text> 
+
+                 </View>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments', {
                     postId: this.props.postData.id
                 })}>
@@ -131,11 +135,15 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         marginTop: 10
     },
+    mg:{
+        flexDirection: 'row',
+        justifyContent: 'flex-start'
 
+    },
     like: {
         marginLeft: 15,
         marginBottom: 4,
-        marginTop: 4,
+     //   marginTop: 4,
     },
 
     fondo: {
@@ -169,8 +177,8 @@ const styles = StyleSheet.create({
     third: {
         color: 'white',
         alignContent: 'center',
-        marginLeft: 15,
-        paddingBottom: 10,
+        marginLeft: 3,
+       // paddingBottom: 10,
     },
     fourth: {
         color: 'lightgrey',
