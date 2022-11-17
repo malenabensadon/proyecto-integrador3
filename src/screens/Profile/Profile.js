@@ -110,12 +110,18 @@ class Profile extends Component {
 <View style={styles.container}>
                     <View style={styles.container3}>
                         <View style={styles.container2}>
+                            {this.state.fotopp !== '' ?
                             <Image
                                 style={styles.fotopp}
                                 source={this.state.foto}
                                 resizeMode='cover'
+                            />:
+                            <Image
+                                style={styles.fotopp}
+                                source={require("../../../assets/noProfilePicture.svg")}
+                                resizeMode='cover'
                             />
-
+                        }
                             <View style={styles.datos}>
                                 <Text style={styles.username}>{this.state.userName}</Text>
                                 <Text >{this.state.email}</Text>
