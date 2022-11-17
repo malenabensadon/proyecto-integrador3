@@ -23,13 +23,13 @@ function HomeMenu() {
                 }
             } />
             <Tab.Screen name="NewPost" component={NewPost} options={
-                { tabBarIcon: () => <AntDesign name="pluscircleo" size={24} color="black" />, headerShown: false }
+                { tabBarIcon: () => <AntDesign name="pluscircleo" size={24} color="black" />, headerShown: false, unmountOnBlur: true }
             } />
             {<Tab.Screen name="Search" component={ Search }  options={
                 {tabBarIcon: ()=> <FontAwesome name="search" size={24} color="black" />, headerShown: false} 
             } /> }
             <Tab.Screen name="MyProfile" component={MyProfile} options={
-                { tabBarIcon: () => <AntDesign name="user" size={24} color="black" />, headerShown: false }
+                { tabBarIcon: () => <AntDesign name="user" size={24} color="black" />, headerShown: false, unmountOnBlur: true }
             } />
             
         </Tab.Navigator>

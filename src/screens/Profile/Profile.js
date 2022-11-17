@@ -23,7 +23,8 @@ class Profile extends Component {
             foto:'',
             bio: '',
             userId: '',
-            editSucces: false
+            editSucces: false,
+
         }
     }
 
@@ -126,40 +127,65 @@ class Profile extends Component {
                         <FlatList style={styles.posts}
                             data={this.state.userPosts}
                             keyExtractor={onePost => onePost.id.toString()}
-                            renderItem={({ item }) => <Post style={styles.posteo} postData={item} irAComments={() => { }} refrescarPosts={this.getUserPosts} />}
+                            renderItem={({ item }) => <Post style={styles.posteo} postData={item} navigation= {this.props.navigation}  refrescarPosts={this.getUserPosts} />}
                         />
-               {/*  <View style={styles.container}>
+
+{this.state.email === auth.currentUser.email ?
+
+                          <View style={styles.editar}>
+                            <Text style={styles.editarTexto}>Ingresa lo datos que quieras editar</Text>
+                            <TextInput style={styles.cambio}
+                                placeholder='Ingresa tu nuevo nombre de usuario'
+                                keyboardType='default'
+                                onChangeText={text => this.setState({ userName: text })}
+                                value={this.state.userName}
+                            />
+                            <TextInput style={styles.cambio}
+                                placeholder='Ingresa tu nueva biografia'
+                                keyboardType='default'
+                                onChangeText={text => this.setState({ bio: text })}
+                                value={this.state.bio}
+                            />
+                            <TextInput style={styles.cambio}
+                                placeholder='Ingresa tu actual contraseña'
+                                keyboardType='default'
+                                secureTextEntry
+                                onChangeText={text => this.setState({ currentPassword: text })}
+                                value={this.state.currentPassword}
+                            />
+                            <TextInput style={styles.cambio}
+                                placeholder='Ingresa tu nueva contraseña'
+                                keyboardType='default'
+                                secureTextEntry
+                                onChangeText={text => this.setState({ newPassword: text })}
+                                value={this.state.newPassword}
+                            />
+                            <Text >{this.state.err}</Text>
+                            <TouchableOpacity onPress={() => this.editProfile()}>
+                                <Text style={styles.boton}>Editar</Text>
+                            </TouchableOpacity>
+                            
+                            <TouchableOpacity onPress={() => this.logout()} >
+                            <Text style={styles.boton}>Log out</Text>
+                        </TouchableOpacity>
+
+                        </View>:
+                        <Text></Text>
+
+
+    }
+                        
+                        
                 
-                <View style={styles.container2}>
-                     <Image
-                        style={styles.fotopp}
-                        source={this.state.foto}
-                        resizeMode='cover'/>
-                    </View>
-
-                    <View style={styles.datos}>
-                        <Text style={styles.username}>{this.state.userName}</Text>
-                        <Text>{this.state.email}</Text>
-                        <Text>Cantidad de posteos: {this.state.userPosts.length}</Text>
-                         <Text style={styles.bio}>{this.state.bio}</Text>
-                    </View>
-
-                    </View>
-                    
-                    <FlatList style={styles.posts}
-                        data={this.state.userPosts}
-                        keyExtractor={onePost => onePost.id.toString()}
-                        renderItem={({ item }) => <Post postData={item} irAComments={() => { }} refrescarPosts={this.getUserPosts} />}
-                    /> */}
-                    {/*  <TouchableOpacity onPress={() => this.logout()} >
-                    <Text style={styles.logout}>Log out</Text>
-                </TouchableOpacity> */}
-                
-
+                        
+    
 
                 </View>
+    
+
 
 </View>
+    
             </>
         )
 

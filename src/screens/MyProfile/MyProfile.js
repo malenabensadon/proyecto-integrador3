@@ -131,7 +131,7 @@ class MyProfile extends Component {
                         <FlatList style={styles.posts}
                             data={this.state.userPosts}
                             keyExtractor={onePost => onePost.id.toString()}
-                            renderItem={({ item }) => <Post style={styles.posteo} postData={item} irAComments={() => { }} refrescarPosts={this.getUserPosts} />}
+                            renderItem={({ item }) => <Post style={styles.posteo} postData={item} navigation= {this.props.navigation}  refrescarPosts={this.getUserPosts} />}
                         />
 
 
@@ -167,12 +167,12 @@ class MyProfile extends Component {
                             <TouchableOpacity onPress={() => this.editProfile()}>
                                 <Text style={styles.boton}>Editar</Text>
                             </TouchableOpacity>
-
+                            <TouchableOpacity onPress={() => this.logout()} >
+                            <Text style={styles.logout}>Log out</Text>
+                        </TouchableOpacity>
 
                         </View>
-                        <TouchableOpacity onPress={() => this.logout()} >
-                            <Text style={styles.boton}>Log out</Text>
-                        </TouchableOpacity>
+                       
 
 
                     </View>
@@ -200,10 +200,10 @@ const styles = StyleSheet.create({
        flexDirection: 'row',
         padding: 20,
         justifyContent: 'space-around',
-        zIndex: 10,
+       zIndex: 10,
         backgroundColor: 'white',
         height: 1000,
-        scroll: 2
+       // scroll: 2
 
 
     },
@@ -221,7 +221,21 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         color: 'white',
         textAlign: 'center',
-        padding: 5
+        padding: 5 
+
+    },
+    logout:{
+        borderWidth: 2,
+        backgroundColor: 'black',
+        color: 'white',
+        borderRadius: 8,
+        width: 100,
+        textAlign: 'center',
+        padding: 10,
+        marginTop: 15,
+        marginLeft: 135        
+
+
 
     },
     editar:{

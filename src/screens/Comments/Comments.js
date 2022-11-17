@@ -74,9 +74,16 @@ class Comments extends Component {
                 <FlatList style={style.comentarios}
                     data={this.state.comments}
                     keyExtractor={onePost => onePost.createdAt}
-                    renderItem={({ item }) => <Text style={style.comentar} onPress={() => this.props.navigation.navigate('Profile', {
+                    renderItem={({ item }) => 
+                //  console.log (item.owner)
+                 
+                    <Text style={style.comentar} onPress={() => this.props.navigation.navigate('Profile', {
                         email: item.owner
-                    })}>{item.username}: {item.comment}</Text>}
+                     })}>{item.username}: {item.comment}</Text>
+
+                     }
+                    
+                
                 />
 
                 <TextInput style={style.input}

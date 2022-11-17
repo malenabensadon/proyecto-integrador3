@@ -88,10 +88,16 @@ class Post extends Component {
                     source={{ uri: this.props.postData.data.photo }}
                     resizeMode='cover'
                 />
+                {this.props.postData.data.owner === auth.currentUser.email ?
+                <TouchableOpacity style={styles.first} onPress={() => this.props.navigation.navigate('MyProfile', {email: this.props.postData.data.owner})}>
+                <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text>
+            </TouchableOpacity>:
                 <TouchableOpacity style={styles.first} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
                     <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text>
                 </TouchableOpacity>
+    }
                
+
                 <View style={styles.mg}>
                 {this.state.miLike ?
                     <TouchableOpacity style={styles.like} onPress={() => this.unlike()}>
