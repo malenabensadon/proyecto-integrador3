@@ -164,9 +164,11 @@ const style = StyleSheet.create({
         margin: 7,
         flexDirection: 'row',
         justifyContent: 'flex-start',
+        alignItems: 'center'
     },
     comentario: {
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingLeft: 10
     },
     input: {
         color: 'rgb(0,0,0)',
@@ -178,13 +180,10 @@ const style = StyleSheet.create({
         margin: 10
     },
     profilePic: {
-        height: 50,
-        width: 50,
+        height: 40,
+        width: 40,
         alignContent: 'center',
-        marginLeft: 10,
-        marginBottom: 15,
         borderRadius: 90,
-        marginTop: 10
     }
 });
 
