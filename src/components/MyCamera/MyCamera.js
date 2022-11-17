@@ -98,10 +98,10 @@ class MyCamera extends Component {
                                     ref={metodosDeCamara => this.metodosDeCamara = metodosDeCamara}
                                 />
                                 <TouchableOpacity style={styles.button} onPress={() => this.sacarFoto()}>
-                                    <Text style={styles.texto5}><Ionicons name="radio-button-on" size={90} color="rgb(217, 217, 217)" /></Text>
+                                    <Text style={styles.texto5}><Ionicons name="radio-button-on" size={85} color="rgb(111, 111, 111)" /></Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.subir} onPress={this.pickImage}>
-                                    <Text style={styles.subir}> <AntDesign name="upload" size={25} color="rgb(217, 217, 217)" />  O subir foto de la galería</Text>
+                                    <Text style={styles.subir}> <AntDesign name="upload" size={25} color="rgb(111, 111, 111)" />  O subir foto de la galería</Text>
                                 </TouchableOpacity>
                             </View>
                             :
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         borderRadius: 8
     },
     subir:{
-        color: 'rgb(217, 217, 217)',
+        color: 'rgb(111, 111, 111)',
         textAlign: 'center',
         fontWeight: 600,
         fontSize: 20

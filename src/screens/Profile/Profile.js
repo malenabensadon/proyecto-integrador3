@@ -105,32 +105,61 @@ class Profile extends Component {
     render() {
         return (
             <>
-                <View style={styles.container}>
 
-                <View style={styles.containerPic}>
+<View style={styles.container}>
+                    <View style={styles.container3}>
+                        <View style={styles.container2}>
+                            <Image
+                                style={styles.fotopp}
+                                source={this.state.foto}
+                                resizeMode='cover'
+                            />
+
+                            <View style={styles.datos}>
+                                <Text style={styles.username}>{this.state.userName}</Text>
+                                <Text >{this.state.email}</Text>
+                                <Text >Cantidad de posteos: {this.state.userPosts.length}</Text>
+                                <Text style={styles.bio}>{this.state.bio}</Text>
+                            </View>
+                        </View>
+
+                        <FlatList style={styles.posts}
+                            data={this.state.userPosts}
+                            keyExtractor={onePost => onePost.id.toString()}
+                            renderItem={({ item }) => <Post style={styles.posteo} postData={item} irAComments={() => { }} refrescarPosts={this.getUserPosts} />}
+                        />
+               {/*  <View style={styles.container}>
+                
+                <View style={styles.container2}>
                      <Image
-                        style={styles.foto}
+                        style={styles.fotopp}
                         source={this.state.foto}
                         resizeMode='cover'/>
                     </View>
 
-                    <View style={styles.containerText}>
-                        <Text style={styles.titulo}></Text>
-                        <Text style={styles.textos}>{this.state.userName}</Text>
-                        <Text style={styles.textos2}>{this.state.email}</Text>
-                        <Text style={styles.textos2}>{this.state.bio}</Text>
+                    <View style={styles.datos}>
+                        <Text style={styles.username}>{this.state.userName}</Text>
+                        <Text>{this.state.email}</Text>
+                        <Text>Cantidad de posteos: {this.state.userPosts.length}</Text>
+                         <Text style={styles.bio}>{this.state.bio}</Text>
+                    </View>
+
                     </View>
                     
-                    <Text style={styles.textos2}>Cantidad de posteos: {this.state.userPosts.length}</Text>
-                    <FlatList
+                    <FlatList style={styles.posts}
                         data={this.state.userPosts}
                         keyExtractor={onePost => onePost.id.toString()}
                         renderItem={({ item }) => <Post postData={item} irAComments={() => { }} refrescarPosts={this.getUserPosts} />}
-                    />
-                     <TouchableOpacity onPress={() => this.logout()} >
+                    /> */}
+                    {/*  <TouchableOpacity onPress={() => this.logout()} >
                     <Text style={styles.logout}>Log out</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+                
+
+
                 </View>
+
+</View>
             </>
         )
 
@@ -139,7 +168,95 @@ class Profile extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'white',
+        flex: 3,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%',
+        scroll: 2
+    },
+    container2: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 20,
+        justifyContent: 'space-around',
+    //    width: '100%',
+       // scroll: 2
+
+
+    },
+    datos:{
+        marginRight: 20
+    },
+    container3: {
+      //  flex: 1,
+      
+
+    },
+    boton:{
+        borderWidth: 1,
+        backgroundColor: 'black',
+        borderRadius: 8,
+        color: 'white',
+        textAlign: 'center',
+        padding: 5
+
+    },
+    editar:{
+        backgroundColor: 'white',
+        color: 'black',
+        padding: 30
+    },
     textos: {
+        color: 'white',
+        fontFamily: 'Oswald, sans-serif',
+        fontWeight: 'bold',
+        fontSize: 25,
+        textAlign: 'center',
+    },
+    fotopp: {
+        height: '16vh',
+        width: '16vh',
+        marginLeft: 15,
+        //  marginBottom: 10,
+        borderRadius: 90,
+        marginRight: 20,
+    },
+    cambio:{
+        padding: 4,
+        borderWidth: 1,
+        borderRadius: 8,
+        borderColor: 'black',
+        margin: 4,
+    },
+
+    posteo: {
+        padding: 20
+    },
+    fotoss: {
+        flex: 1,
+        flexDirection: 'column',
+    },
+    editarTexto:{
+        fontSize: 17,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    username: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        marginTop: 4
+    },
+    bio:{
+        marginTop: 7
+    },
+    posts:{
+        padding:30,
+        marginTop: 60
+    }
+
+    /* textos: {
         color: 'white',
         fontFamily: 'Oswald, sans-serif',
         fontWeight: 'bold',
@@ -199,7 +316,7 @@ const styles = StyleSheet.create({
         width: '10vh',
         height: '10vh',
 
-    }
+    } */
 })
 
 

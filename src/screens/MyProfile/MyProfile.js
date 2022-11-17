@@ -205,6 +205,9 @@ const styles = StyleSheet.create({
 
 
     },
+    datos:{
+        marginRight: 20
+    },
     container3: {
       //  flex: 1,
       
@@ -234,7 +237,7 @@ const styles = StyleSheet.create({
     fotopp: {
         height: '16vh',
         width: '16vh',
-        marginLeft: 10,
+        marginLeft: 15,
         //  marginBottom: 10,
         borderRadius: 90,
         marginRight: 20,
