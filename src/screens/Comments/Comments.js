@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { auth, db } from '../../firebase/config';
-import { Text, View, FlatList, TouchableOpacity, TextInput } from 'react-native';
+import { Text, View, FlatList, TouchableOpacity, TextInput, Image } from 'react-native';
 import { StyleSheet } from 'react-native-web';
 import firebase from 'firebase';
 
@@ -10,9 +10,10 @@ class Comments extends Component {
         this.state = {
             comments: [],
             text: '',
-            cantComments: 0,
             email: '',
             userName: '',
+            owner: '',
+            profilePicture: ''
         }
     };
 
@@ -27,10 +28,12 @@ class Comments extends Component {
                 const postData = doc.data();
                 this.setState({
                     comments: postData.comments,
+                    owner: postData.owner
                 })
             }
         )
     }
+
 
     getUserInfo() {
         db.collection('users').where('owner', '==', auth.currentUser.email).onSnapshot(
@@ -40,13 +43,25 @@ class Comments extends Component {
                     this.setState({
                         email: user.owner,
                         userName: user.userName,
+                        profilePicture: user.foto
                     })
                 });
             }
         )
+        
     }
 
     createComment(text) {
+        // db.collection('users').where('owner', '==', this.state.owner).onSnapshot(
+        //     docs => {
+        //         docs.forEach(doc => {
+        //             const user = doc.data();
+        //             this.setState({
+        //                 profilePicture: user.foto
+        //             })
+        //         });
+        //     }
+        // )
         db.collection('posts')
             .doc(this.props.route.params.postId) //identificar bien el documento porque trae siempre el mismo
             .update({
@@ -54,13 +69,15 @@ class Comments extends Component {
                     comment: text,
                     owner: this.state.email,
                     username: this.state.userName,
+                    profilePic: this.state.profilePicture,
                     createdAt: Date.now()
+
                 })
             })
             .then(() => {
                 this.getComments();
                 this.setState({
-                    cantComments: this.state.cantComments + 1, //arreglar el estado como para que nos traiga la length del array
+                    //cantComments: this.state.cantComments + 1, 
                     text: '',
                 })
             })
@@ -76,10 +93,24 @@ class Comments extends Component {
                     keyExtractor={onePost => onePost.createdAt}
                     renderItem={({ item }) => 
                 //  console.log (item.owner)
-                 
-                    <Text style={style.comentar} onPress={() => this.props.navigation.navigate('Profile', {
-                        email: item.owner
-                     })}>{item.username}: {item.comment}</Text>
+                        <View style={style.comentar}>
+                            {item.profilePic !== '' ?
+                            <Image
+                                style={style.profilePic}
+                                source={{ uri: item.profilePic }}
+                                resizeMode='cover'
+                            />:
+                            <Image 
+                                style={style.profilePic}
+                                source={require("../../../assets/noProfilePicture.svg")}
+                                resizeMode='cover' 
+                            />
+                             }               
+                            <Text style={style.comentario} onPress={() => this.props.navigation.navigate('Profile', {
+                                email: item.owner
+                            })}>{item.username}: {item.comment}</Text>
+                        </View>
+
 
                      }
                     
@@ -130,7 +161,12 @@ const style = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         borderRadius: 8,
-        margin: 7
+        margin: 7,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+    },
+    comentario: {
+        alignItems: 'center'
     },
     input: {
         color: 'rgb(0,0,0)',
@@ -140,6 +176,15 @@ const style = StyleSheet.create({
         backgroundColor: 'rgb(255,255,255)',
         padding: 10,
         margin: 10
+    },
+    profilePic: {
+        height: 50,
+        width: 50,
+        alignContent: 'center',
+        marginLeft: 10,
+        marginBottom: 15,
+        borderRadius: 90,
+        marginTop: 10
     }
 });
 

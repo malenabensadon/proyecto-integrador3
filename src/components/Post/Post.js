@@ -88,7 +88,7 @@ class Post extends Component {
     }
 
     render() {
-        console.log(this.state.biog)
+        
         return (
             <View style={styles.fondo}>
               {/*   <TouchableOpacity style={styles.first} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
@@ -100,13 +100,20 @@ class Post extends Component {
                       <Text style={styles.username}>{this.props.postData.data.userName}</Text>  
                 </TouchableOpacity> */}
                 <View style={styles.userContainer}>
-                 <Image
-                    style={styles.profilePic}
-                    source={{ uri: this.state.profilePic }}
-                    resizeMode='cover'
-                /><TouchableOpacity style={styles.usernameButton} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
-                <Text style={styles.usernameText}>{this.props.postData.data.userName}</Text>
-                </TouchableOpacity>
+                {this.state.profilePic !== '' ?
+                    <Image
+                        style={styles.profilePic}
+                        source={{ uri: this.state.profilePic }}
+                        resizeMode='cover'
+                    />:
+                    <Image style={styles.profilePic}
+                    source={require("../../../assets/noProfilePicture.svg")}
+                    resizeMode='cover' 
+                    />
+                }
+                    <TouchableOpacity style={styles.usernameButton} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
+                        <Text style={styles.usernameText}>{this.props.postData.data.userName}</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <Image
