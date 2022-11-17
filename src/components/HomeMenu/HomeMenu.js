@@ -9,6 +9,7 @@ import Home from '../../screens/Home/Home';
 import MyProfile from '../../screens/MyProfile/MyProfile';
 import NewPost from '../../screens/NewPost/NewPost';
 import Profile from '../../screens/Profile/Profile';
+import ProfileEdit from '../../screens/ProfileEdit/ProfileEdit';
 import Search from '../../screens/Search/Search';
 
 const Tab = createBottomTabNavigator();
@@ -42,6 +43,7 @@ function HomeStack() {
             <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
             <Stack.Screen name="Comments" component={Comments} options={{ headerShown: false }} />
             <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }}/>
+            <Stack.Screen name="ProfileEdit" component={ProfileEdit} options={{ headerShown: false }}/>
         </Stack.Navigator>
     )
 }

@@ -10,7 +10,9 @@ import {
     FlatList,
     Image
 } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import Post from '../../components/Post/Post';
+
 
 class Profile extends Component {
     constructor() {
@@ -101,7 +103,10 @@ class Profile extends Component {
             this.updateProfileInfo();
         }
     }
-
+    logout() {
+        auth.signOut()
+            .then(() => this.props.navigation.navigate("Login"))
+    }
 
     render() {
         return (
@@ -110,7 +115,7 @@ class Profile extends Component {
 <View style={styles.container}>
                     <View style={styles.container3}>
                         <View style={styles.container2}>
-                            {this.state.fotopp !== '' ?
+                            {this.state.foto !== '' ?
                             <Image
                                 style={styles.fotopp}
                                 source={this.state.foto}
@@ -128,18 +133,31 @@ class Profile extends Component {
                                 <Text >Cantidad de posteos: {this.state.userPosts.length}</Text>
                                 <Text style={styles.bio}>{this.state.bio}</Text>
                             </View>
+                            {this.state.email === auth.currentUser.email ?
+                                <View>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ProfileEdit')}>
+                                        <FontAwesome name="gear" size={20}/>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.logout()}>
+                                        <Text>logout icon</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                :
+                                 <Text></Text>
+                                }
                         </View>
-
+                        
                         <FlatList style={styles.posts}
                             data={this.state.userPosts}
                             keyExtractor={onePost => onePost.id.toString()}
                             renderItem={({ item }) => <Post style={styles.posteo} postData={item} navigation= {this.props.navigation}  refrescarPosts={this.getUserPosts} />}
                         />
 
-{this.state.email === auth.currentUser.email ?
+                        {this.state.email === auth.currentUser.email ?
 
                           <View style={styles.editar}>
-                            <Text style={styles.editarTexto}>Ingresa lo datos que quieras editar</Text>
+                           
+                            <Text style={styles.editarTexto} onPress={ () => this.props.navigation.navigate('ProfileEdit', {owner: this.state.userId})}> Ingresa lo datos que quieras editar ?</Text>
                             <TextInput style={styles.cambio}
                                 placeholder='Ingresa tu nuevo nombre de usuario'
                                 keyboardType='default'
@@ -174,12 +192,11 @@ class Profile extends Component {
                             <TouchableOpacity onPress={() => this.logout()} >
                             <Text style={styles.boton}>Log out</Text>
                         </TouchableOpacity>
-
-                        </View>:
+                        
+                        </View>
+                        :
                         <Text></Text>
-
-
-    }
+                         }
                         
                         
                 
