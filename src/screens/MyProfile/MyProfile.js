@@ -189,19 +189,21 @@ class MyProfile extends Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
-        flex: 3,
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
         width: '100%',
         scroll: 2
     },
     container2: {
-        flex: 1,
-        flexDirection: 'row',
+       flex: 2,
+       flexDirection: 'row',
         padding: 20,
         justifyContent: 'space-around',
-    //    width: '100%',
-       // scroll: 2
+        zIndex: 10,
+        backgroundColor: 'white',
+        height: 1000,
+        scroll: 2
 
 
     },
