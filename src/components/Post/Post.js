@@ -15,6 +15,8 @@ class Post extends Component {
             cantidadDeComments: this.props.postData.data.comments.length,
             comments: [],
             isMyPost: false,
+            profilePic: '',
+            biog: ''
         }
     }
 
@@ -27,6 +29,19 @@ class Post extends Component {
             })
         }
         this.checkIsMyPost();
+        this.getUserInfo();
+    }
+    getUserInfo() {
+        db.collection('users').where('owner', '==', this.props.postData.data.owner).onSnapshot(
+            docs => {
+                docs.forEach(doc => {
+                    const user = doc.data();
+                    this.setState({
+                        profilePic: user.foto
+                    })
+                });
+            }
+        )
     }
 
     like() {
@@ -73,6 +88,7 @@ class Post extends Component {
     }
 
     render() {
+        console.log(this.state.biog)
         return (
             <View style={styles.fondo}>
               {/*   <TouchableOpacity style={styles.first} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
@@ -83,19 +99,25 @@ class Post extends Component {
                 />  // imagen de perfil  
                       <Text style={styles.username}>{this.props.postData.data.userName}</Text>  
                 </TouchableOpacity> */}
+                <View style={styles.userContainer}>
+                 <Image
+                    style={styles.profilePic}
+                    source={{ uri: this.state.profilePic }}
+                    resizeMode='cover'
+                /><TouchableOpacity style={styles.usernameButton} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
+                <Text style={styles.usernameText}>{this.props.postData.data.userName}</Text>
+                </TouchableOpacity>
+                </View>
+
                 <Image
                     style={styles.photo}
                     source={{ uri: this.props.postData.data.photo }}
                     resizeMode='cover'
                 />
-                {this.props.postData.data.owner === auth.currentUser.email ?
-                <TouchableOpacity style={styles.first} onPress={() => this.props.navigation.navigate('MyProfile', {email: this.props.postData.data.owner})}>
-                <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text>
-            </TouchableOpacity>:
                 <TouchableOpacity style={styles.first} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
                     <Text style={styles.first}>{this.props.postData.data.userName}: {this.props.postData.data.textoPost}</Text>
                 </TouchableOpacity>
-    }
+    
                
 
                 <View style={styles.mg}>
@@ -141,10 +163,43 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         marginTop: 10
     },
+    profilePic: {
+        height: 50,
+        width: 50,
+        alignContent: 'center',
+        marginLeft: 10,
+        marginBottom: 15,
+        borderRadius: 90,
+        marginTop: 10
+    },
     mg:{
         flexDirection: 'row',
         justifyContent: 'flex-start'
 
+    },
+    userContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+    },
+    usernameButton: {
+        color: 'rgb(59, 59, 59)',
+        // textAlign: 'center',
+        flex: 1,
+        flexDirection: 'row',
+        fontWeight: 600,
+        marginLeft: 8,
+        //paddingBottom: 3,
+        alignItems: 'center'
+    },
+    usernameText: {
+        color: 'rgb(59, 59, 59)',
+        // textAlign: 'center',
+        fontSize: 15,
+        flex: 1,
+        flexDirection: 'row',
+        fontWeight: 700,
+        marginLeft: 8,
+        paddingBottom: 3, 
     },
     like: {
         marginLeft: 15,
