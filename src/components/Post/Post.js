@@ -118,7 +118,7 @@ class Post extends Component {
                 </TouchableOpacity>
                 {this.state.isMyPost ? (
                     <TouchableOpacity style={styles.trash} onPress={() => this.borrarPost()}>
-                        <FontAwesome name='trash' color='white' size={18} />
+                        <FontAwesome name='trash' color='rgb(59, 59, 59)' size={18} />
                     </TouchableOpacity>
                 ) : null}
             </View>
@@ -190,6 +190,7 @@ const styles = StyleSheet.create({
     trash: {
         marginTop: 3,
         marginLeft: 15,
+        marginBottom: 6,
     },
     username: {
         fontSize: 17,

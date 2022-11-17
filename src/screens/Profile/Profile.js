@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         
     },
     container: {
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         flex: 1,
         padding: 15,
     },
@@ -157,13 +157,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     containerText: {
+        color: 'black',
         margin: 15,
         width: '70vw',
         flexGrow: 1,
         flex: 1
     },
     textos2: {
-        color: 'white',
+        color: 'black',
         fontFamily: 'Oswald, sans-serif',
         fontWeight: 'bold',
         fontSize: 10,
@@ -174,22 +175,19 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     textos3: {
-        color: 'white',
-        fontFamily: 'Oswald, sans-serif',
+        color: 'black',
         fontWeight: 'bold',
         fontSize: 20,
         textAlign: 'center',
     },
     textos4: {
-        color: 'white',
-        fontFamily: 'Oswald, sans-serif',
+        color: 'black',
         fontWeight: 'bold',
         fontSize: 15,
         textAlign: 'center',
     },
     input: {
-        color: 'white',
-        fontFamily: 'Oswald, sans-serif',
+        color: 'black',
         fontSize: 10,
         textAlign: 'center',
         margin: 4
@@ -198,8 +196,8 @@ const styles = StyleSheet.create({
        // flex: 1,
        // minHeight: 150,
         borderRadius: 90,
-        width: 10,
-        height: 10,
+        width: '10vh',
+        height: '10vh',
 
     }
 })

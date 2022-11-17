@@ -111,65 +111,71 @@ class MyProfile extends Component {
         //   console.log(this.state.newPassword);
         return (
             <>
-                <View >
-                    <View >
-                        <Image
+                <View style={styles.container}>
+                    <View style={styles.container3}>
+                        <View style={styles.container2}>
+                            <Image
+                                style={styles.fotopp}
+                                source={this.state.foto}
+                                resizeMode='cover'
+                            />
 
-                            source={this.state.foto}
-                            resizeMode='small'
+                            <View style={styles.datos}>
+                                <Text style={styles.username}>{this.state.userName}</Text>
+                                <Text >{this.state.email}</Text>
+                                <Text >Cantidad de posteos: {this.state.userPosts.length}</Text>
+                                <Text style={styles.bio}>{this.state.bio}</Text>
+                            </View>
+                        </View>
+
+                        <FlatList style={styles.posts}
+                            data={this.state.userPosts}
+                            keyExtractor={onePost => onePost.id.toString()}
+                            renderItem={({ item }) => <Post style={styles.posteo} postData={item} irAComments={() => { }} refrescarPosts={this.getUserPosts} />}
                         />
 
-                        <View >
 
-                            <Text >{this.state.userName}</Text>
-                            <Text >{this.state.email}</Text>
-                            <Text >Cantidad de posteos: {this.state.userPosts.length}</Text>
-                            <Text>{this.state.bio}</Text>
+                        <View style={styles.editar}>
+                            <Text style={styles.editarTexto}>Ingresa lo datos que quieras editar</Text>
+                            <TextInput style={styles.cambio}
+                                placeholder='Ingresa tu nuevo nombre de usuario'
+                                keyboardType='default'
+                                onChangeText={text => this.setState({ userName: text })}
+                                value={this.state.userName}
+                            />
+                            <TextInput style={styles.cambio}
+                                placeholder='Ingresa tu nueva biografia'
+                                keyboardType='default'
+                                onChangeText={text => this.setState({ bio: text })}
+                                value={this.state.bio}
+                            />
+                            <TextInput style={styles.cambio}
+                                placeholder='Ingresa tu actual contraseña'
+                                keyboardType='default'
+                                secureTextEntry
+                                onChangeText={text => this.setState({ currentPassword: text })}
+                                value={this.state.currentPassword}
+                            />
+                            <TextInput style={styles.cambio}
+                                placeholder='Ingresa tu nueva contraseña'
+                                keyboardType='default'
+                                secureTextEntry
+                                onChangeText={text => this.setState({ newPassword: text })}
+                                value={this.state.newPassword}
+                            />
+                            <Text >{this.state.err}</Text>
+                            <TouchableOpacity onPress={() => this.editProfile()}>
+                                <Text style={styles.boton}>Editar</Text>
+                            </TouchableOpacity>
+
+
                         </View>
+                        <TouchableOpacity onPress={() => this.logout()} >
+                            <Text style={styles.boton}>Log out</Text>
+                        </TouchableOpacity>
+
+
                     </View>
-
-
-                    <FlatList
-                        data={this.state.userPosts}
-                        keyExtractor={onePost => onePost.id.toString()}
-                        renderItem={({ item }) => <Post postData={item} irAComments={() => { }} refrescarPosts={this.getUserPosts} />}
-                    />
-
-                    <Text >Ingresa lo datos que quieras editar</Text>
-                    <TextInput
-                        placeholder='Ingresa tu nuevo nombre de usuario'
-                        keyboardType='default'
-                        onChangeText={text => this.setState({ userName: text })}
-                        value={this.state.userName}
-                    />
-                    <TextInput
-                        placeholder='Ingresa tu nueva biografia'
-                        keyboardType='default'
-                        onChangeText={text => this.setState({ bio: text })}
-                        value={this.state.bio}
-                    />
-                    <TextInput
-                        placeholder='Ingresa tu actual contraseña'
-                        keyboardType='default'
-                        secureTextEntry
-                        onChangeText={text => this.setState({ currentPassword: text })}
-                        value={this.state.currentPassword}
-                    />
-                    <TextInput
-                        placeholder='Ingresa tu nueva contraseña'
-                        keyboardType='default'
-                        secureTextEntry
-                        onChangeText={text => this.setState({ newPassword: text })}
-                        value={this.state.newPassword}
-                    />
-                    <Text >{this.state.err}</Text>
-                    <TouchableOpacity onPress={() => this.editProfile()}>
-                        <Text >Editar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.logout()} >
-                        <Text >Log out</Text>
-                    </TouchableOpacity>
-
 
                 </View>
 
@@ -181,13 +187,91 @@ class MyProfile extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'white',
+        flex: 3,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%',
+        scroll: 2
+    },
+    container2: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 20,
+        justifyContent: 'space-around',
+    //    width: '100%',
+       // scroll: 2
+
+
+    },
+    container3: {
+      //  flex: 1,
+      
+
+    },
+    boton:{
+        borderWidth: 1,
+        backgroundColor: 'black',
+        borderRadius: 8,
+        color: 'white',
+        textAlign: 'center',
+        padding: 5
+
+    },
+    editar:{
+        backgroundColor: 'white',
+        color: 'black',
+        padding: 30
+    },
     textos: {
         color: 'white',
         fontFamily: 'Oswald, sans-serif',
         fontWeight: 'bold',
         fontSize: 25,
         textAlign: 'center',
+    },
+    fotopp: {
+        height: '16vh',
+        width: '16vh',
+        marginLeft: 10,
+        //  marginBottom: 10,
+        borderRadius: 90,
+        marginRight: 20,
+    },
+    cambio:{
+        padding: 4,
+        borderWidth: 1,
+        borderRadius: 8,
+        borderColor: 'black',
+        margin: 4,
+    },
+
+    posteo: {
+        padding: 20
+    },
+    fotoss: {
+        flex: 1,
+        flexDirection: 'column',
+    },
+    editarTexto:{
+        fontSize: 17,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    username: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        marginTop: 4
+    },
+    bio:{
+        marginTop: 7
+    },
+    posts:{
+        padding:30,
+        marginTop: 60
     }
+
 })
 
 

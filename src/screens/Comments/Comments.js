@@ -71,10 +71,10 @@ class Comments extends Component {
     render() {
         return (
             <View style={style.container}>
-                <FlatList
+                <FlatList style={style.comentarios}
                     data={this.state.comments}
                     keyExtractor={onePost => onePost.createdAt}
-                    renderItem={({ item }) => <Text onPress={() => this.props.navigation.navigate('Profile', {
+                    renderItem={({ item }) => <Text style={style.comentar} onPress={() => this.props.navigation.navigate('Profile', {
                         email: item.owner
                     })}>{item.username}: {item.comment}</Text>}
                 />
@@ -106,12 +106,24 @@ const style = StyleSheet.create({
     btnLogin: {
         borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: 'rgb(180, 37, 130)',
         backgroundColor: 'rgb(0,0,0)',
         margin: 10,
         padding: 10,
         textAlign: 'center',
-        color: 'white'
+        color: 'white',
+        borderRadius: 8,
+
+    },
+    comentarios: {
+        padding: 10,
+        flexDirection: 'column',
+        flex: 10,
+    },
+    comentar: {
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 8,
+        margin: 7
     },
     input: {
         color: 'rgb(0,0,0)',
