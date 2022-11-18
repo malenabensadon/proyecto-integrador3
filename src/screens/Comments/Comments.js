@@ -3,6 +3,7 @@ import { auth, db } from '../../firebase/config';
 import { Text, View, FlatList, TouchableOpacity, TextInput, Image } from 'react-native';
 import { StyleSheet } from 'react-native-web';
 import firebase from 'firebase';
+import { FontAwesome } from '@expo/vector-icons';
 
 class Comments extends Component {
     constructor(props) {
@@ -33,6 +34,7 @@ class Comments extends Component {
             }
         )
     }
+    
 
 
     getUserInfo() {
@@ -63,7 +65,7 @@ class Comments extends Component {
         //     }
         // )
         db.collection('posts')
-            .doc(this.props.route.params.postId) //identificar bien el documento porque trae siempre el mismo
+            .doc(this.props.route.params.postId)
             .update({
                 comments: firebase.firestore.FieldValue.arrayUnion({
                     comment: text,
@@ -88,11 +90,16 @@ class Comments extends Component {
     render() {
         return (
             <View style={style.container}>
+                <TouchableOpacity style={style.arrow} onPress={() => this.props.navigation.navigate('Home')}>
+                    <FontAwesome name="arrow-left" size={20}/>
+                </TouchableOpacity>
+
+                {this.state.comments.length >= 1 ?
                 <FlatList style={style.comentarios}
                     data={this.state.comments}
                     keyExtractor={onePost => onePost.createdAt}
                     renderItem={({ item }) => 
-                //  console.log (item.owner)
+                
                         <View style={style.comentar}>
                             {item.profilePic !== '' ?
                             <Image
@@ -116,6 +123,9 @@ class Comments extends Component {
                     
                 
                 />
+                :
+                <Text style={style.noComments}> Aún no hay comentarios</Text>
+                }
 
                 <TextInput style={style.input}
                     placeholder='Add a comment'
@@ -184,6 +194,16 @@ const style = StyleSheet.create({
         width: 40,
         alignContent: 'center',
         borderRadius: 90,
+    },
+    noComments: {
+        color: 'gray',
+        fontSize: 20,
+        marginBottom: 400,
+        fontStyle: 'italic'
+
+    },
+    arrow: {
+        alignItems: 'start'
     }
 });
 
