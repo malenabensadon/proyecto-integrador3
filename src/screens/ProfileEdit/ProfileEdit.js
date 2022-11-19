@@ -156,7 +156,8 @@ class ProfileEdit extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        flex: 1
     },
     foto: {
         height: 90,
@@ -177,9 +178,9 @@ const styles = StyleSheet.create({
 
     },
     editar:{
-       backgroundColor: 'rgb(230, 230, 230)',
+       backgroundColor: 'rgb(238, 238, 238)',
         color: 'black',
-        borderRadius: 5,
+        borderRadius: 8,
         padding: 30,
         alignItems: 'center',
         marginLeft: 10,
@@ -207,9 +208,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         //borderRadius: 5,
         borderBottomColor: 'pink',
-        borderLeftColor: 'rgb(230, 230, 230)',
-        borderTopColor: 'rgb(230, 230, 230)',
-        borderRightColor: 'rgb(230, 230, 230)',
+        borderLeftColor: 'rgb(238, 238, 238)',
+        borderTopColor: 'rgb(238, 238, 238)',
+        borderRightColor: 'rgb(238, 238, 238)',
         //borderColor: 'black',
         margin: 4,
     },

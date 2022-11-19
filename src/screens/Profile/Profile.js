@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Post from '../../components/Post/Post';
+import { AntDesign } from '@expo/vector-icons'; 
 
 
 class Profile extends Component {
@@ -132,28 +133,28 @@ class Profile extends Component {
                                 <Text >{this.state.email}</Text>
                                 <Text >Cantidad de posteos: {this.state.userPosts.length}</Text>
                                 <Text style={styles.bio}>{this.state.bio}</Text>
-                            </View>
-                            {this.state.email === auth.currentUser.email ?
-                                <View>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ProfileEdit')}>
-                                        <FontAwesome name="gear" size={20}/>
+                                {this.state.email === auth.currentUser.email ?
+                                <View style={styles.logos}>
+                                    <TouchableOpacity style={styles.tuerca} onPress={() => this.props.navigation.navigate('ProfileEdit')}>
+                                        <FontAwesome name="gear" size={22}/>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.logout()}>
-                                        <Text>logout icon</Text>
+                                    <TouchableOpacity style={styles.cerrar} onPress={() => this.logout()}>
+                                    <AntDesign name="logout" size={20} color="black" />
                                     </TouchableOpacity>
                                 </View>
                                 :
                                  <Text></Text>
                                 }
+                            </View>
+                          
                         </View>
-                        
                         <FlatList style={styles.posts}
                             data={this.state.userPosts}
                             keyExtractor={onePost => onePost.id.toString()}
                             renderItem={({ item }) => <Post style={styles.posteo} postData={item} navigation= {this.props.navigation}  refrescarPosts={this.getUserPosts} />}
                         />
 
-                        {this.state.email === auth.currentUser.email ?
+                      {/*   {this.state.email === auth.currentUser.email ?
 
                           <View style={styles.editar}>
                            
@@ -196,7 +197,7 @@ class Profile extends Component {
                         </View>
                         :
                         <Text></Text>
-                         }
+                         } */}
                         
                         
                 
@@ -219,11 +220,11 @@ class Profile extends Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
-        flex: 3,
+        flex: 2,
         flexDirection: 'row',
         justifyContent: 'space-around',
         width: '100%',
-        scroll: 2
+        scroll: 2,
     },
     container2: {
         flex: 1,
@@ -236,12 +237,18 @@ const styles = StyleSheet.create({
 
     },
     datos:{
-        marginRight: 20
+        marginRight: 20,
+        marginBottom: 100
     },
     container3: {
       //  flex: 1,
       
-
+    
+    },
+    logos:{
+        flex: 2,
+        flexDirection: 'row',
+        marginTop: 10,
     },
     boton:{
         borderWidth: 1,
@@ -251,6 +258,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         padding: 5
 
+    },
+    tuerca:{
+        marginRight: 8
     },
     editar:{
         backgroundColor: 'white',
@@ -302,7 +312,7 @@ const styles = StyleSheet.create({
     },
     posts:{
         padding:30,
-        marginTop: 60
+        marginTop: 130
     }
 
     /* textos: {

@@ -74,6 +74,7 @@ class Login extends Component {
                     <TextInput style={style.input}
                         placeholder='Password'
                         keyboardType='default'
+                        secureTextEntry
                         onChangeText={text => this.setState({ pass: text })}
                         value={this.state.pass}
                     />

@@ -241,7 +241,8 @@ const styles = StyleSheet.create({
     editar:{
         backgroundColor: 'white',
         color: 'black',
-        padding: 30
+        padding: 30,
+        
     },
     textos: {
         color: 'white',
@@ -288,7 +289,7 @@ const styles = StyleSheet.create({
     },
     posts:{
         padding:30,
-        marginTop: 60
+        marginTop: 130
     }
 
 })

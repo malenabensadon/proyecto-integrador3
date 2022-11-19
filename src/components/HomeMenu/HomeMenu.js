@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Comments from '../../screens/Comments/Comments';
 import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons'; 
 
 import Home from '../../screens/Home/Home';
 import MyProfile from '../../screens/MyProfile/MyProfile';
@@ -27,7 +28,7 @@ function HomeMenu() {
                 { tabBarIcon: () => <AntDesign name="pluscircleo" size={24} color="black" />, headerShown: false, unmountOnBlur: true }
             } />
             {<Tab.Screen name="Search" component={ Search }  options={
-                {tabBarIcon: ()=> <FontAwesome name="search" size={24} color="black" />, headerShown: false} 
+                {tabBarIcon: ()=> <Ionicons name="search-outline" size={28} color="black" />, headerShown: false} 
             } /> }
             <Tab.Screen name="MyProfile" component={MyProfile} options={
                 { tabBarIcon: () => <AntDesign name="user" size={24} color="black" />, headerShown: false, unmountOnBlur: true }
