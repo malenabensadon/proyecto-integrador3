@@ -134,8 +134,8 @@ class Comments extends Component {
                     onChangeText={text => this.setState({ text: text })}
                     value={this.state.text}
                 />
-                <TouchableOpacity onPress={() => this.createComment(this.state.text)}>
-                    <Text style={style.btnLogin}> Comment </Text>
+                <TouchableOpacity onPress={() => this.createComment(this.state.text)}  disabled={this.state.text === ''}>
+                    <Text style={[style.btnLogin, {opacity: (this.state.text === '') ? 0.5 : 1,}]}> Comment </Text>
                 </TouchableOpacity>
             </View>
 
