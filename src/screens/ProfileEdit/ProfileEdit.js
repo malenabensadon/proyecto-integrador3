@@ -10,6 +10,7 @@ import {
     FlatList,
     Image
 } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import Navbar from '../../components/Navbar/Navbar';
 
 
@@ -24,7 +25,8 @@ class ProfileEdit extends Component {
             bio: '',
             userId: '',
             editSucces: false,
-            err: ''
+            err: '',
+            email: ''
 
         }
     }
@@ -94,6 +96,10 @@ class ProfileEdit extends Component {
             <>
                          <Navbar />
                          <View style={styles.container}>
+                            <TouchableOpacity style={styles.arrow} onPress={() => this.props.navigation.navigate('Profile', {email: this.state.email })}>
+                                <FontAwesome name="arrow-left" size={20}/>
+                            </TouchableOpacity>
+
                           <View style={styles.editar}>
                             <Text style={styles.editarTexto}>Ingresa lo datos que quieras editar</Text>
                             {this.state.foto !== '' ?
@@ -220,6 +226,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center'
     },
+    arrow: {
+        margin: 10
+    }
 
    
 })

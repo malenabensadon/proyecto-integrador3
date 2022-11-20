@@ -12,6 +12,7 @@ import NewPost from '../../screens/NewPost/NewPost';
 import Profile from '../../screens/Profile/Profile';
 import ProfileEdit from '../../screens/ProfileEdit/ProfileEdit';
 import Search from '../../screens/Search/Search';
+import { auth } from '../../firebase/config';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -30,7 +31,7 @@ function HomeMenu() {
             {<Tab.Screen name="Search" component={ Search }  options={
                 {tabBarIcon: ()=> <Ionicons name="search-outline" size={28} color="black" />, headerShown: false} 
             } /> }
-            <Tab.Screen name="MyProfile" component={MyProfile} options={
+            <Tab.Screen name="Profile" component={Profile} initialParams={{email: auth.currentUser.email}} options={
                 { tabBarIcon: () => <AntDesign name="user" size={24} color="black" />, headerShown: false, unmountOnBlur: true }
             } />
             
