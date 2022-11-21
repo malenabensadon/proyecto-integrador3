@@ -146,10 +146,8 @@ class Post extends Component {
                  <Text style={styles.third}>{this.state.cantidadDeLikes}</Text> 
 
                  </View>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments', {
-                    postId: this.props.postData.id
-                })}>
-                    <Text style={styles.fourth}>{this.props.postData.data.comments.length} Comments...</Text>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments', { postId: this.props.postData.id})}>
+                    <Text style={styles.fourth}> {this.props.postData.data.comments.length} Comentarios... </Text>
                 </TouchableOpacity>
                 {this.state.isMyPost ? (
                     <TouchableOpacity style={styles.trash} onPress={() => this.borrarPost()}>

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { auth, db } from '../../firebase/config';
 import { Text, View, FlatList, TouchableOpacity, TextInput, Image } from 'react-native';
 import { StyleSheet } from 'react-native-web';
+
 import firebase from 'firebase';
+import { auth, db } from '../../firebase/config';
+
 import { FontAwesome } from '@expo/vector-icons';
 
 class Comments extends Component {
@@ -12,15 +14,15 @@ class Comments extends Component {
             comments: [],
             text: '',
             email: '',
-            userName: '',
+            username: '',
             owner: '',
             profilePicture: ''
         }
     };
 
     componentDidMount() {
-        this.getUserInfo();
         this.getComments();
+        this.getUserInfo();
     }
 
     getComments() {
@@ -34,8 +36,6 @@ class Comments extends Component {
             }
         )
     }
-    
-
 
     getUserInfo() {
         db.collection('users').where('owner', '==', auth.currentUser.email).onSnapshot(
@@ -44,7 +44,7 @@ class Comments extends Component {
                     const user = doc.data();
                     this.setState({
                         email: user.owner,
-                        userName: user.userName,
+                        username: user.userName,
                         profilePicture: user.foto
                     })
                 });
@@ -54,32 +54,21 @@ class Comments extends Component {
     }
 
     createComment(text) {
-        // db.collection('users').where('owner', '==', this.state.owner).onSnapshot(
-        //     docs => {
-        //         docs.forEach(doc => {
-        //             const user = doc.data();
-        //             this.setState({
-        //                 profilePicture: user.foto
-        //             })
-        //         });
-        //     }
-        // )
         db.collection('posts')
             .doc(this.props.route.params.postId)
             .update({
                 comments: firebase.firestore.FieldValue.arrayUnion({
                     comment: text,
                     owner: this.state.email,
-                    username: this.state.userName,
+                    username: this.state.username,
                     profilePic: this.state.profilePicture,
                     createdAt: Date.now()
-
+                    //variables que usamos para crear el array de comentarios
                 })
             })
             .then(() => {
                 this.getComments();
                 this.setState({
-                    //cantComments: this.state.cantComments + 1, 
                     text: '',
                 })
             })
@@ -89,45 +78,41 @@ class Comments extends Component {
 
     render() {
         return (
-            <View style={style.container}>
-                <TouchableOpacity style={style.arrow} onPress={() => this.props.navigation.navigate('Home')}>
+            <View style={styles.container}>
+
+                <TouchableOpacity style={styles.arrow} onPress={() => this.props.navigation.navigate('Home')}>
                     <FontAwesome name="arrow-left" size={20}/>
                 </TouchableOpacity>
 
                 {this.state.comments.length >= 1 ?
-                <FlatList style={style.comentarios}
+                <FlatList style={styles.comentarios}
                     data={this.state.comments}
                     keyExtractor={onePost => onePost.createdAt}
                     renderItem={({ item }) => 
-                
-                        <View style={style.comentar}>
-                            {item.profilePic !== '' ?
-                            <Image
-                                style={style.profilePic}
-                                source={{ uri: item.profilePic }}
-                                resizeMode='cover'
-                            />:
-                            <Image 
-                                style={style.profilePic}
-                                source={require("../../../assets/noProfilePicture.svg")}
-                                resizeMode='cover' 
-                            />
-                             }               
-                            <Text style={style.comentario} onPress={() => this.props.navigation.navigate('Profile', {
-                                email: item.owner
-                            })}>{item.username}: {item.comment}</Text>
-                        </View>
-
-
-                     }
-                    
-                
+                            <View style={styles.comentar}>
+                                {item.profilePic !== '' ?
+                                <Image
+                                    style={styles.profilePic}
+                                    source={{ uri: item.profilePic }}
+                                    resizeMode='cover'
+                                />:
+                                <Image 
+                                    style={styles.profilePic}
+                                    source={require("../../../assets/noProfilePicture.svg")}
+                                    resizeMode='cover' 
+                                />
+                                }               
+                                <Text style={styles.comentario} onPress={() => this.props.navigation.navigate('Profile', {
+                                    email: item.owner
+                                })}>{item.username}: {item.comment}</Text>
+                            </View>
+                            }
                 />
                 :
-                <Text style={style.noComments}> Aún no hay comentarios</Text>
+                <Text style={styles.noComments}> Aún no hay comentarios</Text>
                 }
 
-                <TextInput style={style.input}
+                <TextInput style={styles.input}
                     placeholder='Add a comment'
                     keyboardType='default'
                     //poner propiedad para transformarlo en textArea
@@ -135,14 +120,16 @@ class Comments extends Component {
                     value={this.state.text}
                 />
                 <TouchableOpacity onPress={() => this.createComment(this.state.text)}  disabled={this.state.text === ''}>
-                    <Text style={[style.btnLogin, {opacity: (this.state.text === '') ? 0.5 : 1,}]}> Comment </Text>
+                    <Text style={[styles.btnLogin, {opacity: (this.state.text === '') ? 0.5 : 1,}]}> Comment </Text>
                 </TouchableOpacity>
-            </View>
 
-        )
-    };
+            </View>
+            )
+        };
 }
-const style = StyleSheet.create({
+
+
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
@@ -206,6 +193,5 @@ const style = StyleSheet.create({
         alignItems: 'start'
     }
 });
-
 
 export default Comments;
