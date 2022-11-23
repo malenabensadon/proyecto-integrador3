@@ -30,7 +30,7 @@ class Register extends Component {
         //Registrar en firebase y si el reigstro sale bien redireccionar a Home
         auth.createUserWithEmailAndPassword(this.state.email, this.state.pass)
             .then(res => {
-                console.log(this.state.foto)
+                //console.log(this.state.foto)
                 db.collection('users').add({
                     owner: this.state.email,
                     userName: this.state.userName,
@@ -100,6 +100,7 @@ class Register extends Component {
                         keyboardType='default'
                         onChangeText={text => this.setState({ pass: text })}
                         value={this.state.pass}
+                        secureTextEntry={true}
                     />
                     {this.state.errors.field === 'password' && (
                         <Text> {this.state.errors.message} </Text>
