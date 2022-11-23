@@ -66,7 +66,7 @@ class Search extends Component {
                                 data={this.state.users}
                                 keyExtractor={item => item.id.toString()}
                                 renderItem={({ item }) =>
-                                    <Text style={style.text} onPress={() => this.props.navigation.navigate('Profile', { email: item.data.owner })}>{item.data.userName} </Text>
+                                    <Text style={style.text} onPress={() => this.props.navigation.navigate('SearchProfile', { email: item.data.owner })}>{item.data.userName} </Text>
                                 }
                             />
                         }

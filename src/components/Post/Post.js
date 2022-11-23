@@ -111,7 +111,7 @@ class Post extends Component {
                     resizeMode='cover' 
                     />
                 }
-                    <TouchableOpacity style={styles.usernameButton} onPress={() => this.props.navigation.navigate('Profile', {email: this.props.postData.data.owner})}>
+                    <TouchableOpacity style={styles.usernameButton} onPress={() => this.props.navigation.navigate('HomeProfile', {email: this.props.postData.data.owner})}>
                         <Text style={styles.usernameText}>{this.props.postData.data.userName}</Text>
                     </TouchableOpacity>
                 </View>

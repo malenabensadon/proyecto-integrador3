@@ -30,7 +30,9 @@ class Comments extends Component {
             doc => {
                 const postData = doc.data();
                 this.setState({
-                    comments: postData.comments,
+                    comments: postData.comments.sort((postA, postB) => {
+                        return postB.createdAt - postA.createdAt
+                    }),
                     owner: postData.owner
                 })
             }
@@ -102,7 +104,7 @@ class Comments extends Component {
                                     resizeMode='cover' 
                                 />
                                 }               
-                                <Text style={styles.comentario} onPress={() => this.props.navigation.navigate('Profile', {
+                                <Text style={styles.comentario} onPress={() => this.props.navigation.navigate('HomeProfile', {
                                     email: item.owner
                                 })}>{item.username}: {item.comment}</Text>
                             </View>

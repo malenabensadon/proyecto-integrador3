@@ -76,7 +76,7 @@ class ProfileEdit extends Component {
                     user.updatePassword(this.state.newPassword)
                         .then(res => {
                             this.updateProfileInfo();
-                            this.props.navigation.navigate('Profile')
+                            this.props.navigation.navigate('MyProfile')
                         })
                         .catch(err => console.log(err))
                 })
@@ -96,7 +96,7 @@ class ProfileEdit extends Component {
             <>
                          <Navbar />
                          <View style={styles.container}>
-                            <TouchableOpacity style={styles.arrow} onPress={() => this.props.navigation.navigate('Profile', {email: this.state.email })}>
+                            <TouchableOpacity style={styles.arrow} onPress={() => this.props.navigation.navigate('MyProfile', {email: this.state.email })}>
                                 <FontAwesome name="arrow-left" size={20}/>
                             </TouchableOpacity>
 
