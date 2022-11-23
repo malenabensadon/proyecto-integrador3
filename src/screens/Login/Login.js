@@ -21,7 +21,7 @@ class Login extends Component {
             }
         }
     }
-    componentDidMount() { //Solo para redirigir y mostrar más fácil los ejemplos
+    componentDidMount() { 
         auth.onAuthStateChanged(
             user => {
                 if (user) {
@@ -74,7 +74,7 @@ class Login extends Component {
                     <TextInput style={style.input}
                         placeholder='Password'
                         keyboardType='default'
-                        secureTextEntry
+                        secureTextEntry={true}
                         onChangeText={text => this.setState({ pass: text })}
                         value={this.state.pass}
                     />
