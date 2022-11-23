@@ -41,6 +41,12 @@ class Home extends Component {
       //      .then(() => this.props.navigation.navigate("Login"))
     //}
 
+
+logout() {
+    auth.signOut()
+        .then(() => this.props.navigation.navigate("Login"))
+}
+
     render() {
         return (
             <>
@@ -57,9 +63,9 @@ class Home extends Component {
                     keyExtractor={onePost => onePost.id.toString()}
                     renderItem={({ item }) => <Post postData={item} navigation= {this.props.navigation} />}
                 />
-                {/* <TouchableOpacity onPress={() => this.logout()} >
+                { <TouchableOpacity onPress={() => this.logout()} >
                     <Text style={styles.logout}>Log out</Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity>}
             </>
 
         )
