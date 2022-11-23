@@ -86,7 +86,7 @@ class ProfileEdit extends Component {
 
         } else {
             this.updateProfileInfo();
-            this.props.navigation.navigate('Profile')
+            this.props.navigation.navigate('MyProfile')
         }
 
     }
