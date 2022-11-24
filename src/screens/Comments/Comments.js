@@ -89,7 +89,7 @@ class Comments extends Component {
                 {this.state.comments.length >= 1 ?
                 <FlatList style={styles.comentarios}
                     data={this.state.comments}
-                    keyExtractor={onePost => onePost.createdAt.toString()}
+                    keyExtractor={oneComment => oneComment.createdAt.toString()}
                     renderItem={({ item }) => 
                             <View style={styles.comentar}>
                                 {item.profilePic !== '' ?
