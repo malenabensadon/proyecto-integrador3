@@ -63,9 +63,7 @@ logout() {
                     keyExtractor={onePost => onePost.id.toString()}
                     renderItem={({ item }) => <Post postData={item} navigation= {this.props.navigation} />}
                 />
-                { <TouchableOpacity onPress={() => this.logout()} >
-                    <Text style={styles.logout}>Log out</Text>
-                </TouchableOpacity>}
+                
             </>
 
         )
